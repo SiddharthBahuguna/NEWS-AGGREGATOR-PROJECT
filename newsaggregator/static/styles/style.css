@@ -1,0 +1,169 @@
+
+body {
+    background-color: rgba(255, 253, 253, 0.999);
+    color: black;
+    font-size: 1.5rem;
+}
+
+/* class selector for dark mode*/
+.dark-mode {
+    background-color: black ;
+    color: white;
+}
+
+.navbar-section{
+  width: 100%;
+  height: 5rem;
+  border-bottom: 0.1rem solid rgb(126, 123, 123);
+  font-family: 'Times New Roman', serif;
+}
+
+.navbar-section a:hover {
+  background-color: #c3bfbf;
+  border-radius: 1rem;
+  padding-top: 0.2rem;
+}
+
+.navbar-collapse {
+  margin-right: 4rem;
+}
+
+.nav-item{
+  padding-left: 0.5rem;
+}
+
+
+/* Custom CSS for login form */
+.dropdown-menu.login-form {
+  width: 20rem; /* Reduced width */
+  height: 20rem;
+  padding: 10px; /* Reduced padding */
+  background-color: #636161; /* Black background color */
+}
+.dropdown-menu.login-form label {
+  font-weight: bold;
+  color: #ffffff; /* White text color */
+}
+.dropdown-menu.login-form input[type="text"],
+.dropdown-menu.login-form input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #222; /* Dark background color */
+  color: #fff; /* White text color */
+}
+.dropdown-menu.login-form button[type="submit"] {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+.dropdown-menu.login-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+.dropdown-divider {
+  margin: 10px 0;
+}
+
+
+
+
+.jumbotron {
+  width: 100%;
+  height: 15rem;
+  background-color: #e9dcd2;
+  font-family: Garamond, serif;
+  border-radius: 0.5rem;
+  border: 0.1rem solid rgb(126, 123, 123);
+
+}
+
+
+/* Define custom button colors */
+.btn-instagram {
+  background-color: #ff1493;
+  border-color: #ff1493;
+  color: white;
+}
+.btn-whatsapp {
+  background-color: #32cd32;
+  border-color: #32cd32;
+  color: white;
+}
+.btn-facebook {
+  background-color: #1e90ff;
+  border-color: #1e90ff;
+  color: white;
+}
+
+
+/* about page styles */
+.about-section {
+  width: 80%;
+  height: 38rem;
+  color: black;
+  background-color: #e9dcd2;
+  font-family: Garamond, serif;
+  border-radius: 0.5rem;
+  border: 0.1rem solid rgb(126, 123, 123);
+  /* display: flex;
+  justify-content: center; */
+  text-align: center;
+  margin: 20px auto;
+  padding: 0 20px;
+ 
+}
+
+.about-section .sections {
+  margin: 2rem;
+  color: #555;
+}
+
+
+.about-section h1 {
+  margin-top: 1rem;
+  font-size: 5rem;
+}
+
+.about-section h2 {
+  font-size: bold;
+  color: rgb(0, 0, 0); /* Change color to black */
+}
+
+
+.about-section  p {
+  margin-bottom: 15px; /* Added margin for spacing */
+  font-family: "Times New Roman", Times, serif; /* Set font family to Times New Roman */
+}
+
+.about-section  ul {
+  list-style: none;
+  padding: 0;
+}
+
+
+.about-section  li {
+  margin-bottom: 10px;
+}
+
+  /* Footer Styles */
+footer {
+    background-color: rgb(90, 90, 90);
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    /* position: fixed;
+    bottom: 0; */
+    width: 100%;
+    border-top: 0.1rem solid rgb(126, 123, 123);
+}
+
+footer p {
+    color: #fff; /* Set text color to white for better visibility */
+}
