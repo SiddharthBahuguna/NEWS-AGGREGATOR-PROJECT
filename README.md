@@ -85,11 +85,4 @@ git push -u origin <your_branch_name>
 13. Congratulations! 🎉 you've made your contribution.
 
 
-## Screenshots 📷
-Home Page
-![Home Page](Screenshots/HomePage.png)
-
-About Page
-![About Page](Screenshots/AboutPage.png)
-
 
