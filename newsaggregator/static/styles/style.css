@@ -16,10 +16,11 @@ body {
   height: 5rem;
   border-bottom: 0.1rem solid rgb(126, 123, 123);
   font-family: 'Times New Roman', serif;
+  background-color: whitesmoke;
 }
 
 .navbar-section a:hover {
-  background-color: #c3bfbf;
+  background-color: #d5d5d5;
   border-radius: 1rem;
   padding-top: 0.2rem;
 }
@@ -31,6 +32,36 @@ body {
 .nav-item{
   padding-left: 0.5rem;
 }
+
+
+
+.navbar-light .navbar-brand {
+  color: rgba(0, 0, 0, .55);
+  font-size: 1.5rem;
+}
+
+.navbar-light .nav-custom a:hover {
+  padding: 0.5rem;
+}
+
+
+.navbar-section .navbar-collapse .navbar-nav{
+  background-color: whitesmoke;
+  color: #fff; 
+}
+
+
+
+.navbar-section .navbar-collapse .navbar-nav li {
+  padding-left: 0.3rem;
+}
+
+
+.navbar-section .navbar-collapse .navbar-nav a:hover {
+  padding-left: 1rem;
+}
+
+
 
 
 /* Custom CSS for login form */
@@ -81,6 +112,7 @@ body {
   font-family: Garamond, serif;
   border-radius: 0.5rem;
   border: 0.1rem solid rgb(126, 123, 123);
+  margin-top: 5rem;
 
 }
 
@@ -115,7 +147,7 @@ body {
   /* display: flex;
   justify-content: center; */
   text-align: center;
-  margin: 20px auto;
+  margin: 5rem auto 4rem;
   padding: 0 20px;
  
 }
@@ -167,3 +199,35 @@ footer {
 footer p {
     color: #fff; /* Set text color to white for better visibility */
 }
+
+
+
+
+@media (max-width: 1015px) {
+  .about-section {
+    height: 80%
+  }
+}
+
+.navbar-toggler {
+  background-color: whitesmoke;
+}
+
+
+@media (max-width: 994px){
+  .navbar-section .navbar-collapse .navbar-nav li{
+    background-color: whitesmoke;
+    height: 6rem;
+  }
+}
+
+
+@media (max-width: 1200px){
+  .navbar-expand-lg .navbar-collapse .navbar-nav{
+    height: 1rem;
+    margin-bottom: 1.6rem;
+    font-size: 1.3rem;
+  }
+}
+
+
