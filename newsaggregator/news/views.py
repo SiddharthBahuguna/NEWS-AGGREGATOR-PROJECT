@@ -114,14 +114,16 @@ def Register(request):
         form=UserForm(request.POST)
         if form.is_valid():
             user_name=form.cleaned_data.get('username')
+            password=form.cleaned_data.get('password1')
             form.save()
+            user=authenticate(request,username=user_name,password=password)
+            login(request,user)
             messages.success(request,'Account created for '+ user_name)
         else:
             messages.info(request,form.errors)
     return redirect("/")
 
 def Login(request):
-    data={'message':None}
     if request.method == 'POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
