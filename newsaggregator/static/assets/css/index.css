@@ -1,0 +1,78 @@
+nav{
+    background-color: transparent;
+    border-bottom: 1px solid rgb(206, 206, 206);
+}
+.nav-item .nav-link img{
+    border-radius: 50%;
+}
+.upperHeading{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.heading{
+    font-size: 1.4em;
+    font-weight: 500;
+}
+.EventShows .btn_sharingAndLike{
+    color: grey;
+    font-size: 2em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: last baseline;
+}
+.EventShows .event_image{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+}
+.EventShows .event_image img{
+    max-height: 10em;
+    width: 17em;
+}
+.EventShows .add_btn a span{
+    font-size: 2em;
+    text-decoration: none;
+    color: grey;
+}
+.EventsList{
+    margin-bottom: 1.4em;
+}
+.like-event-btn{
+    background-color: transparent;
+    border: none;
+}
+.like-event-btn i{
+    font-size: .7em;
+}
+.like-event-btn i:last-child{
+    color: red;
+}
+.like-event-btn i:first-child{
+    color: grey;
+}
+.selectionBtnSet{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.selectionBtn{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: .5em;
+}
+.selectionBtn button{
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: .3em;
+    padding: .2em .5em;
+}
+#userSpecificBtn.active,
+#globalBtn.active{
+    background-color: rgb(184, 184, 184);
+    color: white;
+    font-weight: 400;
+}

@@ -1,0 +1,69 @@
+{% extends 'partials/base_auth.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="main-container">
+        <div class="main-content">
+            <div class="form-container">
+                <div class="form-content box">
+                    <div class="logo">
+                        <img src="../../static/assets/images/logo.png" alt="News logo" class="logo-light">
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="signin-form" id="signin-form">
+                            <div class="form-group">
+                                <div class="animate-input">
+                                    <span>
+                                        Enter email
+                                    </span>
+                                    <input class="login-signup-input" type="text" name="email" maxlength="100" required="" id="login_username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="animate-input">
+                                    <span>
+                                        Enter Password
+                                    </span>
+                                    <input class="login-signup-input" type="password" name="password" autocomplete="current-password" required="" id="login_password">
+                                    <button>Show</button>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn-login" id="signin-btn" type="submit">
+                                    Sign In
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="box goto">
+                    <p>
+                        Don't have an account?
+                        <a href="{% url 'userauths:sign-up' %}">Sign up</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="links">
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Locations</a>
+            
+        </div>
+        <div class="copyright">
+            © 2024 News from Earth
+        </div>
+    </div>
+</div>
+{% endblock content %}

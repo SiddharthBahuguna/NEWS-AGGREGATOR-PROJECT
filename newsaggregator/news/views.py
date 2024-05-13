@@ -46,7 +46,7 @@ def news_list(request):
     headlines = Headline.objects.all()[::-1]#store records in reverse order
     context = {
         "object_list": headlines,}
-    return render(request, "home.html", context)
+    return render(request, "core/home.html", context)
 
 # context is a dictionary using which we can pass values to templates from views
 
@@ -94,5 +94,5 @@ def breakinghome(request):
         "object_list": headlines,
     }
 
-    return render(request, "home.html", context)
+    return render(request, "core/home.html", context)
 
