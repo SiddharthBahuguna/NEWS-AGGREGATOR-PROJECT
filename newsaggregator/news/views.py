@@ -4,6 +4,11 @@ from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup as BSoup
 from news.models import Headline
 
+from django.contrib.auth import login,logout,authenticate
+from django.contrib import messages
+
+from .forms import UserForm
+
 # Create your views here.
 #view for scraping new
 
@@ -42,10 +47,14 @@ def scrape(request, name):
 
 
 def news_list(request):
+    user=str(request.user)
+    if user=="AnonymousUser":
+        user=None
     #fetching records stored in Headline model
     headlines = Headline.objects.all()[::-1]#store records in reverse order
     context = {
         "object_list": headlines,}
+    context['user']=user
     return render(request, "home.html", context)
 
 # context is a dictionary using which we can pass values to templates from views
@@ -96,3 +105,34 @@ def breakinghome(request):
 
     return render(request, "home.html", context)
 
+
+def Register(request):
+    context={'message':None}
+    form=UserForm()
+    context['form']=form
+    if request.method == 'POST':
+        form=UserForm(request.POST)
+        if form.is_valid():
+            user_name=form.cleaned_data.get('username')
+            form.save()
+            messages.success(request,'Account created for '+ user_name)
+        else:
+            messages.info(request,form.errors)
+    return redirect("/")
+
+def Login(request):
+    data={'message':None}
+    if request.method == 'POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+        else:
+            messages.info(request,'Username or Password is Incorrect')
+    return redirect("/")
+
+def Logout(request):
+    messages.success(request,"Successfully logged Out")
+    logout(request)
+    return redirect('/')
