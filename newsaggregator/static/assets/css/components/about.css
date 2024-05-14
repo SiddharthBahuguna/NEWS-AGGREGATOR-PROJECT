@@ -1,0 +1,9 @@
+.about-us h4{
+    color: var(--foreground-primary);
+}
+.about-us p{
+    color: var(--foreground-secondary);
+}
+.about-us ul{
+    color: var(--foreground-secondary);
+}
