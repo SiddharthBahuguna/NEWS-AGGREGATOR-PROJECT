@@ -19,7 +19,7 @@ def register_view(request):
                                     password=form.cleaned_data['password1'])
             
             login(request, new_user)
-            return redirect("news:home")
+            return redirect("core:index")
     else:
         form=UserRegisterForm()
 
@@ -31,7 +31,7 @@ def register_view(request):
 def login_view(request):
     if request.user.is_authenticated:
         messages.warning(request,f"Hey, You are already Logged in")
-        return redirect('news:home')
+        return redirect('core:index')
     else:
         if request.method=="POST":
             email=request.POST.get("email")
@@ -47,7 +47,7 @@ def login_view(request):
             if user is not None:
                 login(request,user)
                 messages.success(request,"Your are logged in.")
-                return redirect("news:home")
+                return redirect("core:index")
             
             else:
                 messages.warning(request,"User Does not exist, create an accounnt")

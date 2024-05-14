@@ -31,8 +31,17 @@
 
 <body class="light-theme">
 
-    {% block index %}
-    {% endblock index %}
+    <header>
+        <div class="container">
+            {% include 'components/navbar.html' %}
+            {% load social_share %}
+            {% block category %}
+            {% endblock category %}
+        </div>
+        {% block index %}
+        {% endblock index %}
+    </header>
+    {% include 'components/footer.html' %}
 
 </body>
 

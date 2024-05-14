@@ -8,6 +8,10 @@ from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup as BSoup
 from news.models import Headline
 
+from datetime import datetime
+from core.forms import ContactForm
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 # Create your views here.
 #view for scraping new
 
@@ -44,7 +48,7 @@ def scrape(request, name):
         #saving details to table
     return redirect("../")
 
-
+@login_required(login_url='userauths:sign-in')
 def news_list(request):
     #fetching records stored in Headline model
     headlines = Headline.objects.all()[::-1]#store records in reverse order
@@ -52,7 +56,6 @@ def news_list(request):
         "object_list": headlines,}
     return render(request, "core/index.html", context)
 
-# @login_required(login_url='userauths:sign-in')
 def index(request):
     Headline.objects.all().delete()
     session = requests.Session()
@@ -96,10 +99,33 @@ def about(request):
     return render(request, "core/about.html", context)
 
 def contact(request):
-    context={
+    today_date = datetime.now().strftime('%Y-%m-%d')
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            phone = form.cleaned_data['phone']
+            content = form.cleaned_data['content']
 
+            html = render_to_string('core/email.html', {
+                'name': name,
+                'email': email,
+                'phone': phone,
+                'content': content,
+            })
+
+            send_mail("The contact form subject", 'this is the message', email, ['anurag6569201@gmail.com'], html_message=html)
+            return redirect("home:index")
+    else:
+        form = ContactForm()
+
+    context={
+        'today_date': today_date,
+        'form': form,
     }
-    return render(request, "core/contact.html", context)
+    return render(request,"core/contact.html",context)
 
 def advertise(request):
     context={

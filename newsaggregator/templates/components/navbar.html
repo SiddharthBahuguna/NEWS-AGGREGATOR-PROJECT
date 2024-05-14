@@ -33,8 +33,11 @@
                 <a href="{% url 'core:contact' %}" class="nav-link">Contact</a>
             </li>
 
-            <li>
-                <a href="{% url 'core:contact' %}" class="nav-link">Sign-in/Sign-up</a>
+            <li>{% if not request.user %}
+                <a href="{% url 'userauths:sign-up' %}" class="nav-link">Sign-in/Sign-up</a>
+                {% else %}
+                <a href="{% url 'userauths:sign-out' %}" class="nav-link">Sign-out</a>
+                {% endif %}
             </li>
         </ul>
 
