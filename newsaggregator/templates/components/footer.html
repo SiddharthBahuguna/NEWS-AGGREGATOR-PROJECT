@@ -1,0 +1,57 @@
+{% load static %}
+<footer>
+    <div class="container">
+        <div class="wrapper">
+            <a href="#" class="footer-logo">
+                <span class="logo-light">
+                    <span class="logo-container"><img src="{% static './assets/images/news.png' %}" alt="logo" width="70" />Onion News</span>
+                </span>
+                <span class="logo-dark">
+                    <span class="logo-container"><img src="{% static './assets/images/news.png' %}" alt="logo" width="70" />Onion News</span>
+                </span>
+            </a>
+
+            <p class="footer-text">
+                Learn & Know about Me and my projects in details!!
+            </p>
+        </div>
+
+        <div class="wrapper">
+            <p class="footer-title">Quick Links</p>
+
+            <ul>
+                <li>
+                    <a href="{% url 'core:advertise' %}" class="footer-link">Advertise with Me</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'core:about' %}" class="footer-link">About Us</a>
+                </li>
+
+                <li>
+                    <a href="{% url 'core:contact' %}" class="footer-link">Contact Me</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="wrapper">
+            <p class="footer-title">Legal Stuff</p>
+
+            <ul>
+                <li>
+                    <a href="{% url 'core:privacy' %}" class="footer-link">Privacy Notice</a>
+                </li>
+
+                <li>
+                    <a href="#" style="pointer-events: none; opacity: 0.5;" class="footer-link">Cookie Policy</a>
+                </li>
+
+                <li>
+                    <a href="#" style="pointer-events: none; opacity: 0.5;" class="footer-link">Terms Of Use</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="copyright">&copy; Copyright 2024 <a href="#">Onion News</a></p>
+</footer>

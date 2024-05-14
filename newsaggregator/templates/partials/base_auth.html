@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intern</title>
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/png">
+
+    <!-- google cdns -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <!-- apps stylesheets -->
+    <link rel="stylesheet" href="{% static 'assets/css/userauth.css' %}">
+
+</head>
+<body>   
+    {% block content %}
+
+    {% endblock content %}
+
+    <!-- apps js -->
+    <script src="{% static 'assets/js/userauth.js' %}"></script>
+</body>
+</html>

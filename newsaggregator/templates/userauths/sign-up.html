@@ -1,0 +1,94 @@
+{% extends 'partials/base_auth.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="main-container">
+        <div class="main-content">
+            <div class="form-container">
+                <div class="form-content box">
+                    <div class="logo">
+                        <img src="../../static/assets/images/logo.png" alt="News logo" class="logo-light">
+                    </div>
+
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="signin-form" id="signin-form">
+                            <div class="form-group">
+                                <div class="animate-input">
+                                    <span>
+                                        Enter Username
+                                    </span>
+                                    <input class="login-signup-input" type="text" name="username" maxlength="100" required id="id_username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="animate-input">
+                                    <span>
+                                        Enter email
+                                    </span>
+                                    <input class="login-signup-input" type="email" name="email" maxlength="320" required id="id_email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="animate-input">
+                                    <span>
+                                        Enter Password
+                                    </span>
+                                    <input class="login-signup-input" type="password" name="password1" autocomplete="new-password" required aria-describedby="id_password1_helptext" id="id_password1">
+                                    <button>Show</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="animate-input">
+                                    <span>
+                                        Enter confirm Password
+                                    </span>
+                                    <input class="login-signup-input" type="password" name="password2" autocomplete="new-password" required aria-describedby="id_password2_helptext" id="id_password2">
+                                    <button>Show</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="animate-input"  style="border: none;">
+                                    <span>Enter password without special characters</span>
+                                </div>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn-login" id="signin-btn" type="submit">
+                                    Sign Up
+                                </button>
+                            </div>
+                            
+                            
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="box goto">
+                    <p>
+                        have an account?
+                        <a href="{% url 'userauths:sign-in' %}">Sign in</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="links">
+            <a href="#">About</a>
+            <a href="#">Blog</a>
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+            <a href="#">Locations</a>
+            
+        </div>
+        <div class="copyright">
+            © 2024 News from Earth
+        </div>
+    </div>
+</div>
+{% endblock content %}

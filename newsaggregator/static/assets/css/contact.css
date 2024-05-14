@@ -1,0 +1,52 @@
+.network-icon{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 1.4em;
+}
+.network-icon li{
+    font-size: 1.4em;
+}
+@media (max-width:1024px) {
+    .network-icon{
+        justify-content: center;
+    }
+}
+.network-icon li a{
+    color: #667fea;
+}
+.contact-form input{
+    width: 100%;
+    padding: .3em;
+    border: 1px solid #a0aec0;
+    margin-bottom: .5em;
+    background-color: transparent;
+    border-bottom: 2px solid #a0aec0;
+    border-radius: .4em;
+    color: #a0aec0;
+    font-size: 1em;
+}
+.contact-form input:focus-visible{
+    outline: none;
+}
+.contact-form textarea:focus-visible{
+    outline: none;
+}
+.contact-form textarea{
+    background-color: transparent;
+    border: 1px solid #a0aec0;
+    padding: .3em;
+    border-bottom: 2px solid #a0aec0;
+    border-radius: .4em;
+    color: #a0aec0;
+    font-size: 1em;
+    width: 100%;
+}
+.contact-form textarea::placeholder,
+.contact-form input::placeholder{
+    color: #a0aec0;
+}
+.contact-form button:hover{
+    background-color: #667fea;
+    color: white;
+}
