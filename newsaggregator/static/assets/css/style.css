@@ -521,6 +521,13 @@ footer .wrapper { text-align: center; }
 
 .footer-link:hover { color: var(--accent); }
 
+.wrapper, ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 0;
+}
+
+
 .copyright {
   color: var(--foreground-secondary);
   font-size: var(--fs-4);
