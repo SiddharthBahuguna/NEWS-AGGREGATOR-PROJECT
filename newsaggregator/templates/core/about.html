@@ -4,29 +4,26 @@
 {% block index %}
 <link rel="stylesheet" href="{% static './assets/css/components/about.css' %}">
 
-<div class="container about-us">
-
-    <main>
-        <br>
-        <div style="text-align: left">
-            <h4>About Us</h4>
-        </div>
+<div class="container about">
+    <div class="about-us">
+        <h4>About Us</h4>
         <p>
             Welcome to Onion News Aggregator! We are dedicated to bringing you the
             latest news from various categories.
         </p>
-        <br>
+    </div>
+    <div class="contact-us">
         <h4>Contact Us</h4>
         <p>
             If you have any questions or feedback, feel free to reach out to us:
+            <ul>
+                <li>Email: contact@onionnews.com</li>
+                <li>Phone: 123-456-7890</li>
+                <li>Address: 123 Onion Street, Onionville, ON 12345</li>
+            </ul>
         </p>
-        <ul>
-            <li>Email: contact@onionnews.com</li>
-            <li>Phone: 123-456-7890</li>
-            <li>Address: 123 Onion Street, Onionville, ON 12345</li>
-        </ul>
-    </main>
-
+        
+    </div>
 </div>
 
 {% endblock index %}

@@ -1,9 +1,19 @@
+/* About us page */
+.about {
+    padding: 2rem;
+    /* display: flex; */
+    text-align: center;
+
+}
+
+.about-us {
+    padding-bottom: 1rem;
+}
+
+
 .about-us h4{
     color: var(--foreground-primary);
 }
-.about-us p{
-    color: var(--foreground-secondary);
-}
-.about-us ul{
+p, ul{
     color: var(--foreground-secondary);
 }
