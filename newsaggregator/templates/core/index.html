@@ -4,7 +4,13 @@
 {% block category %}
 {% include 'components/category-btn.html' %}
 {% endblock category %}
-
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+{% endfor %}
+{% endif %}
 {% block index %}
 {% include 'components/news.html' %}
 {% endblock index %}

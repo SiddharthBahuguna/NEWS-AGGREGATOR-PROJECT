@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -117,6 +118,7 @@ def contact(request):
             })
 
             send_mail("The contact form subject", 'this is the message', email, ['email@gmail.com'], html_message=html)
+            messages.success(request, 'Form submitted successfully!')
             return redirect("core:index")
     else:
         form = ContactForm()
