@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -109,15 +110,16 @@ def contact(request):
             phone = form.cleaned_data['phone']
             content = form.cleaned_data['content']
 
-            html = render_to_string('core/email.html', {
+            html = render_to_string('components/email.html', {
                 'name': name,
                 'email': email,
                 'phone': phone,
                 'content': content,
             })
 
-            send_mail("The contact form subject", 'this is the message', email, ['anurag6569201@gmail.com'], html_message=html)
-            return redirect("home:index")
+            send_mail("The contact form subject", 'this is the message', email, ['email@gmail.com'], html_message=html)
+            messages.success(request, 'Form submitted successfully!')
+            return redirect("core:index")
     else:
         form = ContactForm()
 
