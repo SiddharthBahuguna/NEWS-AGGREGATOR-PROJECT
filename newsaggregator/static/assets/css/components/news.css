@@ -74,3 +74,19 @@
     background-color: var(--background-primary);
     border: 1px solid var(--foreground-secondary);
 }
+.modal-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-header .close{
+    background: var(--action-secondary);
+    border: 2px solid var(--foreground-tertiary);
+    color: var(--foreground-secondary);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
