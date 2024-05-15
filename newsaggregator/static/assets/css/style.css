@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Meow+Script&family=Merienda:wght@300..900&family=Noto+Color+Emoji&family=Noto+Emoji:wght@300..700&family=Oleo+Script:wght@400;700&display=swap');
 .light-theme {
 
-  --background-primary: hsl(0, 0%, 100%);
+  --background-primary: hsl(0, 0%, 100%); 
   --background-secondary: hsl(0, 0%, 97%);
 
   --action-primary: hsl(214, 32%, 91%);
@@ -228,17 +228,34 @@ html {
   #HEADER
 \*-----------------------------------*/
 
-header { background: var(--background-primary); }
+header { 
+  background: var(--background-primary); 
+}
 
 header .flex-wrapper { display: none; }
 
-.navbar {
+
+.navbar-section {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  border-bottom: 1px solid var(--action-primary);
+}
+
+
+.navbar-section .navbar {
   display:         flex;
   justify-content: space-between;
   align-items:     center;
   gap: 15px;
   padding: 15px 0;
 }
+
+.dropdown {
+  padding-top: 2rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -325,7 +342,10 @@ header .btn-group {
   color: var(--foreground-secondary);
 }
 
-.mobile-nav .nav-link:hover { color: var(--accent); }
+.mobile-nav .nav-link:hover { 
+  color: var(--accent);
+
+ }
 
 
 
@@ -491,13 +511,18 @@ header .btn-group {
   #FOOTER
 \*-----------------------------------*/
 
-footer { background: var(--background-primary); }
+footer { 
+  background: var(--background-primary);
+ }
 
-footer .container {
-  padding: var(--py) 15px;
-  display: grid;
+footer .footer-section {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-evenly;
   grid-template-columns: 1fr;
   gap: 30px;
+  border-top: 1px solid var(--action-primary);
+
 }
 
 footer .wrapper { text-align: center; }
@@ -532,8 +557,8 @@ footer .wrapper { text-align: center; }
   color: var(--foreground-secondary);
   font-size: var(--fs-4);
   text-align: center;
-  padding: 1rem;
-  border-top: 1px solid var(--action-primary);
+  padding-bottom: 1rem;
+  /* border-top: 1px solid var(--action-primary); */
 }
 
 .copyright a {
@@ -693,7 +718,7 @@ footer .wrapper { text-align: center; }
    */
 
   footer .container {
-    padding: var(--py) 30px;
+    /* padding: var(--py) 30px; */
     grid-template-columns: 2fr 1fr 1fr;
   }
 

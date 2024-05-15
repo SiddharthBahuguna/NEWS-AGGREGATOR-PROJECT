@@ -32,12 +32,12 @@
 <body class="light-theme">
 
     <header>
-        <div class="container">
+        <div class="navbar-section">
             {% include 'components/navbar.html' %}
             {% load social_share %}
-            {% block category %}
-            {% endblock category %}
         </div>
+        {% block category %}
+            {% endblock category %}
         {% block index %}
         {% endblock index %}
     </header>
