@@ -64,6 +64,13 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+<!-- Include jQuery (required for toastr) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Include toastr JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <!-- Report Modal -->
     <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
@@ -150,6 +157,23 @@
         // Prevent the default behavior of the anchor tag
         return false;
     }
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "2000",
+        "hideDuration": "2000",
+        "timeOut": "2000",
+        "extendedTimeOut": "2000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
 
     // add a temporary textarea element, set url to it, select from there
     function copyToClipboard(text) {
@@ -159,7 +183,7 @@
         input.select(); //select textarea content
         document.execCommand("copy");
         document.body.removeChild(input);
-        alert("Copied to clipboard: " + text);
+        toastr["info"]("Link Copied Successfully !!!");
     }
 
     function themeChange() {
