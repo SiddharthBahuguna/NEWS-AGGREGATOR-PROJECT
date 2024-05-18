@@ -34,6 +34,7 @@ body {
     flex-direction: column;
 }
 
+
 .main-container {
     display: flex;
     flex-grow: 1;
@@ -169,6 +170,7 @@ body {
 
 .form-group {
     margin: 0 40px 6px;
+
 }
 
 .animate-input {
@@ -374,6 +376,43 @@ button:disabled {
     font-size: 13px;
     line-height: 18px;
     text-align: center;
+}
+
+.footer {
+    background: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto;
+}
+
+.password-requirements {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px; 
+    font-size: 12px;
+    color: var(--txt-second-color);
+    padding-left: 20px; 
+}
+
+.errors {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: auto;
+    margin-top: 20px;
+}
+
+.errors ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.errors li {
+    margin-bottom: 5px;
 }
 
 /* responsive */
