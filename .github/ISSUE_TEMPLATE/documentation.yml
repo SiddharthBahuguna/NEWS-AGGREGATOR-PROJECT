@@ -1,7 +1,7 @@
-name: "📑 Documentation Update"
+name: "📝 Documentation Update"
 description: "Improve Documentation"
-title: "DOC:"
-labels: [DOC, Needs Triage]
+title: "📝 [DOC]:"
+labels: [📝DOC, Needs Triage]
 body:
   - type: textarea
     attributes:
