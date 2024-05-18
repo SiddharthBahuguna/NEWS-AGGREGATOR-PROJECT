@@ -57,6 +57,7 @@ def news_list(request):
         "object_list": headlines,}
     return render(request, "core/index.html", context)
 
+@login_required(login_url='userauths:sign-in')
 def index(request):
     Headline.objects.all().delete()
     session = requests.Session()
@@ -93,12 +94,14 @@ def index(request):
     }
     return render(request, "core/index.html", context)
 
+@login_required(login_url='userauths:sign-in')
 def about(request):
     context={
 
     }
     return render(request, "core/about.html", context)
 
+@login_required(login_url='userauths:sign-in')
 def contact(request):
     today_date = datetime.now().strftime('%Y-%m-%d')
     if request.method == "POST":
@@ -129,12 +132,14 @@ def contact(request):
     }
     return render(request,"core/contact.html",context)
 
+@login_required(login_url='userauths:sign-in')
 def advertise(request):
     context={
 
     }
     return render(request, "core/advertise.html", context)
 
+@login_required(login_url='userauths:sign-in')
 def privacy(request):
     context={
 

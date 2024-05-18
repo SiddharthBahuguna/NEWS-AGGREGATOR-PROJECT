@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{% static './assets/css/contact.css' %}">
     <link rel="stylesheet" href="{% static './assets/css/style.css' %}">
     <link rel="stylesheet" href="{% static './assets/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/userauth.css' %}">
   
     <!-- font awesome css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -42,6 +43,11 @@
         {% block category %}
             {% endblock category %}
         {% block index %}
+
+        <!-- for authentication page -->
+        {% block authentication %}
+        {% endblock authentication %}
+
         {% endblock index %}
     </header>
     {% include 'components/footer.html' %}
@@ -53,6 +59,7 @@
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 <!--- custom js link-->
+<script src="{% static 'assets/js/userauth.js' %}"></script>
 <script src="{% static 'assets/js/script.js' %}"></script>
 
 <!-- Bootstrap JS -->

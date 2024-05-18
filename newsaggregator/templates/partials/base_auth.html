@@ -4,22 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intern</title>
-    <!-- favicon -->
-    <link rel="shortcut icon" href="./images/favicon.png" type="image/png">
+    <title>Onion News</title>
+    
+    <!--- favicon-->
+    <link rel="shortcut icon" href="{% static './assets/images/news.png' %}" type="image/x-icon">
 
     <!-- google cdns -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     
     <!-- apps stylesheets -->
-    <link rel="stylesheet" href="{% static 'assets/css/userauth.css' %}">
 
 </head>
 <body>   
-    {% block content %}
+    {% block authentication %}
 
-    {% endblock content %}
+    {% endblock authentication %}
+    <body class="light-theme">
 
+        <header>
+            <div class="navbar-section">
+                {% include 'components/navbar.html' %}
+                {% load social_share %}
+            </div>
+            {% block category %}
+                {% endblock category %}
+            {% block index %}
+            {% endblock index %}
+        </header>
+        {% include 'components/footer.html' %}
+    
+    </body>
     <!-- apps js -->
     <script src="{% static 'assets/js/userauth.js' %}"></script>
 </body>
