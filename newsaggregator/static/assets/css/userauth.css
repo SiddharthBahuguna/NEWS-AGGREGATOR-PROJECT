@@ -30,7 +30,6 @@ body {
 }
 
 .container {
-    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -42,9 +41,6 @@ body {
 
 .main-content {
     margin: 32px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     max-width: 935px;
     flex-grow: 1;
 }
@@ -131,7 +127,7 @@ body {
 
 .box {
     border: 1px solid var(--box-border-color);
-    background-color: var(--box-bg);
+    background-color: var(--background-primary);
     border-radius: 3px;
 }
 
@@ -142,6 +138,9 @@ body {
 
 .form-content .logo {
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 51px;
     width: 175px;
     margin: 22px auto 12px;
@@ -229,7 +228,7 @@ body {
     display: inline;
 }
 
-.btn-group {
+.btn-groupss {
     padding: 8px 40px;
 }
 
