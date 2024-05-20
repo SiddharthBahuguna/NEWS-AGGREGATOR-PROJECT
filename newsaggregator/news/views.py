@@ -119,3 +119,14 @@ def view_bookmarks(request):
     }
     return render(request, 'core/bookmarks.html', context)
 
+
+@login_required
+def remove_bookmark(request, headline_id):
+    headline = get_object_or_404(Headline, id=headline_id)
+    bookmark = Bookmark.objects.filter(user=request.user, headline=headline).first()
+    if bookmark:
+        bookmark.delete()
+        messages.success(request, 'Bookmark removed successfully!')
+    else:
+        messages.error(request, 'Bookmark not found!')
+    return redirect('core:index')  # Adjust the redirect as needed

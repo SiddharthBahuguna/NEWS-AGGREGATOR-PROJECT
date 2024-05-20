@@ -37,9 +37,15 @@
                             </div>
                         </div>
                         <div class="">
+                            {% if record.id in user_bookmarked_headline_ids %}
+                            <a href="{% url 'news:remove_bookmark' record.id %}" class="btn btn-danger" aria-label="Remove Bookmark">
+                                Remove Bookmark
+                            </a>
+                            {% else %}
                             <a href="{% url 'news:bookmark_article' record.id %}" class="btn btn-primary" aria-label="Bookmark">
                                 Bookmark
                             </a>
+                            {% endif %}
                         </div>
                         <div class="">
                             <button class="btn btn-danger" data-toggle="modal" data-target="#reportModal"
