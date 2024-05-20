@@ -51,14 +51,20 @@ def scrape(request, name):
 
 @login_required(login_url='userauths:sign-in')
 def news_list(request):
-    #fetching records stored in Headline model
-    headlines = Headline.objects.all()[::-1]#store records in reverse order
+    # Fetch all headlines
+    headlines = Headline.objects.all()[::-1]  # store records in reverse order
     swiper = Headline.objects.all()[:4]
+    
+    # Get the list of bookmarked headline IDs for the current user
+    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+    
     context = {
         "object_list": headlines,
-        'swiper':swiper,
+        'swiper': swiper,
+        'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
     }
     return render(request, "core/index.html", context)
+
 
 @login_required(login_url='userauths:sign-in')
 def index(request):
@@ -148,3 +154,6 @@ def privacy(request):
 
     }
     return render(request, "core/privacy.html", context)
+
+
+
