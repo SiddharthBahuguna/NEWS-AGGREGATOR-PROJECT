@@ -4,6 +4,10 @@ from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup as BSoup
 from news.models import Headline
 
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 # Create your views here.
 #view for scraping new
 
@@ -96,8 +100,8 @@ def breakinghome(request):
 
     return render(request, "core/home.html", context)
 
-
 ################################
+###############################
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Headline, Bookmark
@@ -109,7 +113,7 @@ def bookmark_article(request, headline_id):
     headline = get_object_or_404(Headline, id=headline_id)
     Bookmark.objects.get_or_create(user=request.user, headline=headline)
     messages.success(request, 'Article bookmarked successfully!')
-    return redirect("news:view_bookmarks")  # Adjust the redirect as needed
+    return redirect("core:index")  # Adjust the redirect as needed
 
 @login_required
 def view_bookmarks(request):
@@ -120,13 +124,19 @@ def view_bookmarks(request):
     return render(request, 'core/bookmarks.html', context)
 
 
-@login_required
+@csrf_exempt
+@login_required(login_url='userauths:sign-in')
+def bookmark_article(request, headline_id):
+    if request.method == 'POST':
+        headline = Headline.objects.get(id=headline_id)
+        Bookmark.objects.get_or_create(user=request.user, headline=headline)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+@csrf_exempt
+@login_required(login_url='userauths:sign-in')
 def remove_bookmark(request, headline_id):
-    headline = get_object_or_404(Headline, id=headline_id)
-    bookmark = Bookmark.objects.filter(user=request.user, headline=headline).first()
-    if bookmark:
-        bookmark.delete()
-        messages.success(request, 'Bookmark removed successfully!')
-    else:
-        messages.error(request, 'Bookmark not found!')
-    return redirect('core:index')  # Adjust the redirect as needed
+    if request.method == 'POST':
+        Bookmark.objects.filter(user=request.user, headline_id=headline_id).delete()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)

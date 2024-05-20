@@ -37,16 +37,15 @@
                             </div>
                         </div>
                         <div class="">
-                            {% if record.id in user_bookmarked_headline_ids %}
-                            <a href="{% url 'news:remove_bookmark' record.id %}" class="btn btn-danger" aria-label="Remove Bookmark">
+                            <button class="btn bookmark-btn" data-id="{{ record.id }}" data-bookmarked="{% if record.id in user_bookmarked_headline_ids %}true{% else %}false{% endif %}" aria-label="Bookmark">
+                                {% if record.id in user_bookmarked_headline_ids %}
                                 Remove Bookmark
-                            </a>
-                            {% else %}
-                            <a href="{% url 'news:bookmark_article' record.id %}" class="btn btn-primary" aria-label="Bookmark">
+                                {% else %}
                                 Bookmark
-                            </a>
-                            {% endif %}
+                                {% endif %}
+                            </button>
                         </div>
+                        
                         <div class="">
                             <button class="btn btn-danger" data-toggle="modal" data-target="#reportModal"
                                 aria-label="Report">
@@ -199,3 +198,50 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bookmarkButtons = document.querySelectorAll('.bookmark-btn');
+    bookmarkButtons.forEach(button => {
+        const isBookmarked = button.getAttribute('data-bookmarked') === 'true';
+        if (isBookmarked) {
+            button.textContent = 'Remove Bookmark';
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-danger');
+        } else {
+            button.textContent = 'Bookmark';
+            button.classList.remove('btn-danger');
+            button.classList.add('btn-primary');
+        }
+
+        button.addEventListener('click', function() {
+            const headlineId = this.getAttribute('data-id');
+            const isBookmarkAction = this.textContent.trim() === 'Bookmark';
+            const url = isBookmarkAction ? `/news/bookmark/${headlineId}/` : `/news/remove_bookmark/${headlineId}/`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ headline_id: headlineId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    this.textContent = isBookmarkAction ? 'Remove Bookmark' : 'Bookmark';
+                    this.classList.toggle('btn-primary');
+                    this.classList.toggle('btn-danger');
+                } else {
+                    console.error('Error:', data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+
+    </script>
+        
