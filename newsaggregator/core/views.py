@@ -53,8 +53,11 @@ def scrape(request, name):
 def news_list(request):
     #fetching records stored in Headline model
     headlines = Headline.objects.all()[::-1]#store records in reverse order
+    swiper = Headline.objects.all()[:4]
     context = {
-        "object_list": headlines,}
+        "object_list": headlines,
+        'swiper':swiper,
+    }
     return render(request, "core/index.html", context)
 
 @login_required(login_url='userauths:sign-in')

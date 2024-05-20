@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{% static './assets/css/components/news.css' %}">
 
 <div class="container">
+    {% include 'components/swiperjs.html' %}
 
     <div class="row mt-2 p-2">
         {% for record in object_list %}
