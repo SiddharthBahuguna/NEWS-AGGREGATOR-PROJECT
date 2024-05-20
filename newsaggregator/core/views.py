@@ -148,3 +148,6 @@ def privacy(request):
 
     }
     return render(request, "core/privacy.html", context)
+
+
+

@@ -6,4 +6,6 @@ app_name='news'
 urlpatterns = [
     path('scrape/<str:name>', views.scrape, name="scrape"),
     # path('', views.news_list, name="home"),
+    path('bookmark/<int:headline_id>/', views.bookmark_article, name='bookmark_article'),
+    path('bookmarks/', views.view_bookmarks, name='view_bookmarks'),
 ]

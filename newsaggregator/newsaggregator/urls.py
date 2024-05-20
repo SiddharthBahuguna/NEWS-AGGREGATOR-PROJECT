@@ -8,5 +8,6 @@ urlpatterns = [
     # path('about/', about, name='about'),  # Define the URL pattern for the about page
 
     path('user/',include('userauths.urls')),
+    path('news/',include('news.urls')),
     path('',include('core.urls')),
 ]

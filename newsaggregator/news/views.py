@@ -96,3 +96,26 @@ def breakinghome(request):
 
     return render(request, "core/home.html", context)
 
+
+################################
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Headline, Bookmark
+from django.contrib import messages
+
+
+@login_required
+def bookmark_article(request, headline_id):
+    headline = get_object_or_404(Headline, id=headline_id)
+    Bookmark.objects.get_or_create(user=request.user, headline=headline)
+    messages.success(request, 'Article bookmarked successfully!')
+    return redirect("news:view_bookmarks")  # Adjust the redirect as needed
+
+@login_required
+def view_bookmarks(request):
+    bookmarks = Bookmark.objects.filter(user=request.user)
+    context = {
+        'bookmarks': bookmarks,
+    }
+    return render(request, 'core/bookmarks.html', context)
+

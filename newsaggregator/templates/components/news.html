@@ -37,6 +37,11 @@
                             </div>
                         </div>
                         <div class="">
+                            <a href="{% url 'news:bookmark_article' record.id %}" class="btn btn-primary" aria-label="Bookmark">
+                                Bookmark
+                            </a>
+                        </div>
+                        <div class="">
                             <button class="btn btn-danger" data-toggle="modal" data-target="#reportModal"
                                 aria-label="Report">
                                 Report
