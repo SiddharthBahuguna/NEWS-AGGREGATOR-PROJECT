@@ -1,0 +1,86 @@
+{% load static %}
+<!-- Link Swiper's CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<!-- swiper styles -->
+<style>
+    .swiper {
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: transparent;
+    }
+
+    .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+
+    }
+    .swiper-image{
+        position: relative;
+        overflow: hidden;
+
+    }
+    .swiper-bottom{
+        position: absolute;
+        bottom: 0;
+    }
+</style>
+
+<!-- Swiper -->
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        {% for record in object_list %}
+        <div class="col-12 col-md-6 col-lg-4 mb-4 newscard swiper-slide">
+            <div class="row">
+                <div class="col-md-12 swiper-image">
+                    <img style="max-height: 20em;" class="card-img-top" src="{{ record.image }}" alt="News Image" loading="lazy">
+                    <div class="col-md-12 swiper-bottom">
+                        <div class="card-body d-flex" style="justify-content: center;">
+                            <span class="card-title" style="text-align: left;background-color: aliceblue;padding: 1px 5px;">
+                                <a style="color: var(--accent)!important;" href="#" class="news-link text-dark" data-toggle="modal" data-target="#newsModal"
+                                    data-url="{{ record.url }}">{{ record.title }}</a>
+                            </span>
+                        </div>    
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
