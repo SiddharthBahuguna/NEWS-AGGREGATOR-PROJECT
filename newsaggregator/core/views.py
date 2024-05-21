@@ -56,9 +56,11 @@ def news_list(request):
     swiper = Headline.objects.all()[:6]
     context = {
         "object_list": headlines,
-        'swiper':swiper,
+        'swiper': swiper,
+        'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
     }
     return render(request, "core/index.html", context)
+
 
 @login_required(login_url='userauths:sign-in')
 def index(request):
@@ -148,3 +150,6 @@ def privacy(request):
 
     }
     return render(request, "core/privacy.html", context)
+
+
+
