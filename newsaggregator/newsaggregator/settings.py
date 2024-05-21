@@ -46,10 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # custom apps
-    'news',
     'django_social_share',
-
     'core',
+    
     # authentication
     'userauths',
 ]

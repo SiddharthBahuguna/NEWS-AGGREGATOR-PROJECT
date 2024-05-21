@@ -19,6 +19,16 @@
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-between flex-wrap" style="align-items: center;">
+                        <style>
+                            .bookmark-btn i{
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                            .bookmark-btn{
+                                
+                            }
+                        </style>
                         <div class="">
                             <button class="btn btn-secondary" onclick="copyToClipboard('{{ record.url }}')"
                                 aria-label="Copy URL">
@@ -34,16 +44,14 @@
                                     aria-label="Share on WhatsApp"></a>
                                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ record.url }}" target="_blank"
                                     class="social-icon fa fa-facebook" aria-label="Share on Facebook"></a>
-                            </div>
-                        </div>
-                        <div class="">
-                            <button class="btn bookmark-btn" data-id="{{ record.id }}" data-bookmarked="{% if record.id in user_bookmarked_headline_ids %}true{% else %}false{% endif %}" aria-label="Bookmark">
-                                {% if record.id in user_bookmarked_headline_ids %}
-                                Remove Bookmark
-                                {% else %}
-                                Bookmark
-                                {% endif %}
-                            </button>
+                                <a style="display: flex;align-items: center;justify-content: center;border: 2px solid var(--foreground-tertiary);padding: 0;min-width: 30px!important;width: 30px;height: 30px;" class="btn bookmark-btn" data-id="{{ record.id }}" data-bookmarked="{% if record.id in user_bookmarked_headline_ids %}true{% else %}false{% endif %}" aria-label="Bookmark">
+                                    {% if record.id in user_bookmarked_headline_ids %}
+                                    <i class="social-icon fa solid fa-bookmark"></i>
+                                    {% else %}
+                                    <i class="social-icon fa fa-bookmark"></i>
+                                    {% endif %}
+                                </a>
+                                </div>
                         </div>
                         
                         <div class="">
@@ -206,19 +214,19 @@ document.addEventListener('DOMContentLoaded', function() {
     bookmarkButtons.forEach(button => {
         const isBookmarked = button.getAttribute('data-bookmarked') === 'true';
         if (isBookmarked) {
-            button.textContent = 'Remove Bookmark';
-            button.classList.remove('btn-primary');
-            button.classList.add('btn-danger');
-        } else {
-            button.textContent = 'Bookmark';
+            button.innerHTML = '<i class="social-icon fa solid fa-bookmark"></i>';
             button.classList.remove('btn-danger');
-            button.classList.add('btn-primary');
+            button.classList.add('btn-secondary');
+        } else {
+            button.innerHTML = '<i class="social-icon fa fa-bookmark"></i>';
+            button.classList.remove('btn-secondary');
+            button.classList.add('btn-danger');
         }
 
         button.addEventListener('click', function() {
             const headlineId = this.getAttribute('data-id');
             const isBookmarkAction = this.textContent.trim() === 'Bookmark';
-            const url = isBookmarkAction ? `/news/bookmark/${headlineId}/` : `/news/remove_bookmark/${headlineId}/`;
+            const url = isBookmarkAction ? `/bookmark/${headlineId}/` : `/remove_bookmark/${headlineId}/`;
 
             fetch(url, {
                 method: 'POST',
@@ -231,9 +239,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    this.textContent = isBookmarkAction ? 'Remove Bookmark' : 'Bookmark';
-                    this.classList.toggle('btn-primary');
+                    this.innerHTML = isBookmarkAction ? '<i class="social-icon fa solid fa-bookmark"></i>' : '<i class="social-icon fa fa-bookmark"></i>';
                     this.classList.toggle('btn-danger');
+                    this.classList.toggle('btn-secondary');
                 } else {
                     console.error('Error:', data.message);
                 }

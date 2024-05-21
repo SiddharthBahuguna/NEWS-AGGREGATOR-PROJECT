@@ -1,19 +1,26 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from django.shortcuts import render
 import requests
 from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup as BSoup
-from news.models import Headline
+from core.models import Headline
 
 from datetime import datetime
 from core.forms import ContactForm
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
-# Create your views here.
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from core.models import Headline, Bookmark
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+
 #view for scraping new
 
 def scrape(request, name):
@@ -51,9 +58,13 @@ def scrape(request, name):
 
 @login_required(login_url='userauths:sign-in')
 def news_list(request):
-    #fetching records stored in Headline model
-    headlines = Headline.objects.all()[::-1]#store records in reverse order
-    swiper = Headline.objects.all()[:6]
+    # Fetch all headlines
+    headlines = Headline.objects.all()[::-1]  # store records in reverse order
+    swiper = Headline.objects.all()[:4]
+    
+    # Get the list of bookmarked headline IDs for the current user
+    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+    
     context = {
         "object_list": headlines,
         'swiper': swiper,
@@ -152,4 +163,28 @@ def privacy(request):
     return render(request, "core/privacy.html", context)
 
 
+@login_required
+def view_bookmarks(request):
+    bookmarks = Bookmark.objects.filter(user=request.user)
+    context = {
+        'bookmarks': bookmarks,
+    }
+    return render(request, 'core/bookmarks.html', context)
 
+
+@csrf_exempt
+@login_required(login_url='userauths:sign-in')
+def bookmark_article(request, headline_id):
+    if request.method == 'POST':
+        headline = Headline.objects.get(id=headline_id)
+        Bookmark.objects.get_or_create(user=request.user, headline=headline)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+@csrf_exempt
+@login_required(login_url='userauths:sign-in')
+def remove_bookmark(request, headline_id):
+    if request.method == 'POST':
+        Bookmark.objects.filter(user=request.user, headline_id=headline_id).delete()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
