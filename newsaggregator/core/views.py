@@ -1,19 +1,28 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from django.shortcuts import render
 import requests
 from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup as BSoup
-from news.models import Headline
+from core.models import Headline
 
 from datetime import datetime
 from core.forms import ContactForm
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
-# Create your views here.
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
+from core.models import Headline, Bookmark
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+
+
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 #view for scraping new
 
 def scrape(request, name):
@@ -51,20 +60,34 @@ def scrape(request, name):
 
 @login_required(login_url='userauths:sign-in')
 def news_list(request):
-    # Fetch all headlines
-    headlines = Headline.objects.all()[::-1]  # store records in reverse order
+    # Fetch all headlines in reverse order
+    headlines = Headline.objects.all().order_by('-id')
     swiper = Headline.objects.all()[:4]
-    
+
     # Get the list of bookmarked headline IDs for the current user
-    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+    user_bookmarked_headline_ids = []
+    if request.user.is_authenticated:
+        user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+
+    # Pagination logic
+    page = request.GET.get('page', 1)
+    num_of_items = 9
+    paginator = Paginator(headlines, num_of_items)
     
+    try:
+        headlines_obj = paginator.page(page)
+    except PageNotAnInteger:
+        headlines_obj = paginator.page(1)
+    except EmptyPage:
+        headlines_obj = paginator.page(paginator.num_pages)
+
     context = {
-        "object_list": headlines,
+        "object_list": headlines_obj,
+        "paginator": paginator,
         'swiper': swiper,
         'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
     }
     return render(request, "core/index.html", context)
-
 
 @login_required(login_url='userauths:sign-in')
 def index(request):
@@ -156,4 +179,30 @@ def privacy(request):
     return render(request, "core/privacy.html", context)
 
 
+@login_required
+def view_bookmarks(request):
+     # Get the list of bookmarked headline IDs for the current user
+    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+    bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
+    context = {
+        'bookmarks': bookmarks,
+        'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
+    }
+    return render(request, 'core/bookmarks.html', context)
 
+@csrf_exempt
+@login_required(login_url='userauths:sign-in')
+def bookmark_article(request, headline_id):
+    if request.method == 'POST':
+        headline = get_object_or_404(Headline, id=headline_id)
+        Bookmark.objects.get_or_create(user=request.user, headline=headline)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+@csrf_exempt
+@login_required(login_url='userauths:sign-in')
+def remove_bookmark(request, headline_id):
+    if request.method == 'POST':
+        Bookmark.objects.filter(user=request.user, headline_id=headline_id).delete()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)

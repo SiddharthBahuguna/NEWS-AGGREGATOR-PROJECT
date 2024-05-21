@@ -41,7 +41,8 @@
             {% load social_share %}
         </div>
         {% block category %}
-            {% endblock category %}
+        {% endblock category %}
+        
         {% block index %}
 
         <!-- for authentication page -->
@@ -49,6 +50,7 @@
         {% endblock authentication %}
 
         {% endblock index %}
+        
     </header>
     {% include 'components/footer.html' %}
 

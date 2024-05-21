@@ -1,4 +1,5 @@
 from django.contrib import admin
-from news.models import Headline
+from core.models import Headline,Bookmark
 
 admin.site.register(Headline)
+admin.site.register(Bookmark)
