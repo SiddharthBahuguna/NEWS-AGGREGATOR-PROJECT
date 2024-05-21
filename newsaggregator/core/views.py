@@ -21,6 +21,8 @@ from core.models import Headline, Bookmark
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 
+
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 #view for scraping new
 
 def scrape(request, name):
@@ -58,20 +60,34 @@ def scrape(request, name):
 
 @login_required(login_url='userauths:sign-in')
 def news_list(request):
-    # Fetch all headlines
-    headlines = Headline.objects.all()[::-1]  # store records in reverse order
+    # Fetch all headlines in reverse order
+    headlines = Headline.objects.all().order_by('-id')
     swiper = Headline.objects.all()[:4]
-    
+
     # Get the list of bookmarked headline IDs for the current user
-    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+    user_bookmarked_headline_ids = []
+    if request.user.is_authenticated:
+        user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+
+    # Pagination logic
+    page = request.GET.get('page', 1)
+    num_of_items = 9
+    paginator = Paginator(headlines, num_of_items)
     
+    try:
+        headlines_obj = paginator.page(page)
+    except PageNotAnInteger:
+        headlines_obj = paginator.page(1)
+    except EmptyPage:
+        headlines_obj = paginator.page(paginator.num_pages)
+
     context = {
-        "object_list": headlines,
+        "object_list": headlines_obj,
+        "paginator": paginator,
         'swiper': swiper,
         'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
     }
     return render(request, "core/index.html", context)
-
 
 @login_required(login_url='userauths:sign-in')
 def index(request):

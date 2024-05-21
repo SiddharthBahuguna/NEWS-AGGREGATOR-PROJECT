@@ -62,6 +62,99 @@
             </div>
         </div>
         {% endfor %}
+        <div class="col-md-12">
+            <style>
+                .pagination-outer {
+                    text-align: center;
+                }
+            
+                .pagination {
+                    display: inline-flex;
+                    position: relative;
+                }
+            
+                .pagination:before {
+                    content: "";
+                    width: 100%;
+                    height: 2px;
+                    background: var(--foreground-secondary);
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    transform: translateY(-50%);
+                }
+            
+                .pagination li a.page-link {
+                    padding: 5px 15px;
+                    margin-right: 15px;
+                    background: var(--accent);
+                    border: 1px solid #e8e8e8;
+                    border-radius: 5px;
+                    box-shadow: 0 8px 6px -9px #5b5f5f;
+                    font-size: 17px;
+                    color: var(--foreground-primary);
+                }
+            
+                .pagination li:first-child a.page-link {
+                    margin-right: 30px;
+                }
+            
+                .pagination li:last-child a.page-link {
+                    margin: 0 0 0 15px;
+                }
+            
+                .pagination li.active a.page-link,
+                .pagination li a.page-link:hover {
+                    background: var(--foreground-primary);
+                    border-color: var(--foreground-secondary);
+                    color: var(--accent);
+                }
+                .demo .disabled{
+                    filter: contrast(0.4);
+                }
+                @media only screen and (max-width: 479px) {
+                    .pagination {
+                        display: block;
+                        overflow: auto;
+                    }
+            
+                    .pagination:before {
+                        display: none;
+                    }
+            
+                    .pagination li {
+                        display: inline-block;
+                    }
+                }
+            </style>
+            <br>
+            <div class="demo">
+                <nav class="pagination-outer" aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            <a {% if object_list.has_previous %} href="?page={{ object_list.previous_page_number }}" class="page-link" {% else %} style="pointer-events: none;" class="page-link disabled" {% endif %} class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">Prev</span>
+                            </a>
+                        </li>
+                        {% for page in paginator.page_range %}
+                        <li class="page-item {% if page == object_list.number %}active{% endif %}">
+                            {% if page == object_list.number %}
+                            <a class="page-link">{{ page }}</a>
+                            {% else %}
+                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                        <li class="page-item">
+                            <a {% if object_list.has_next %} href="?page={{ object_list.next_page_number }}" class="page-link" {% else %} style="pointer-events: none;" class="page-link disabled" {% endif %} aria-label="Next">
+                                <span aria-hidden="true">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <br>
+        </div>
     </div>
 
     <!-- News Modal -->
