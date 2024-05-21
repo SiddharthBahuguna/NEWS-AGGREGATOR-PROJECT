@@ -337,14 +337,14 @@ header .btn-group {
 
 .mobile-nav .nav-item { margin-bottom: 0.5rem; }
 
+.bookmark-heading,
 .mobile-nav .nav-link {
   font-size: var(--fs-3);
   color: var(--foreground-secondary);
 }
-
+.bookmark-heading:hover,
 .mobile-nav .nav-link:hover { 
   color: var(--accent);
-
  }
 
 

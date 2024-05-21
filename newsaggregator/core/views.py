@@ -165,18 +165,20 @@ def privacy(request):
 
 @login_required
 def view_bookmarks(request):
-    bookmarks = Bookmark.objects.filter(user=request.user)
+     # Get the list of bookmarked headline IDs for the current user
+    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
+    bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
     context = {
         'bookmarks': bookmarks,
+        'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
     }
     return render(request, 'core/bookmarks.html', context)
-
 
 @csrf_exempt
 @login_required(login_url='userauths:sign-in')
 def bookmark_article(request, headline_id):
     if request.method == 'POST':
-        headline = Headline.objects.get(id=headline_id)
+        headline = get_object_or_404(Headline, id=headline_id)
         Bookmark.objects.get_or_create(user=request.user, headline=headline)
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
