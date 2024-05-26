@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onion News</title>
@@ -35,25 +36,62 @@
 
 <body class="light-theme">
 
-    <header>
-        <div class="navbar-section">
-            {% include 'components/navbar.html' %}
-            {% load social_share %}
-        </div>
-        {% block category %}
-        {% endblock category %}
-        
-        {% block index %}
+    <div class="outer-align" style="display: flex;flex-direction: column;justify-content: space-between;min-height: 100vh;">
+        <header>
+            <div class="navbar-section">
+                {% include 'components/navbar.html' %}
+                {% load social_share %}
+            </div>
+            {% block category %}
+            {% endblock category %}
+            
+            {% block index %}
+    
+            <!-- for authentication page -->
+            {% block authentication %}
+            {% endblock authentication %}
+    
+            {% endblock index %}
+        </header>
+        {% include 'components/footer.html' %}
+    </div>
+    <script>
+        // Apply the saved theme class as soon as the body is available
+        const savedTheme = localStorage.getItem('theme') || 'light-theme';
+        document.body.classList.add(savedTheme);
+    </script>
+    <script>
+        // theme toggle variables
+        const themeBtn = document.querySelectorAll('.theme-btn');
 
-        <!-- for authentication page -->
-        {% block authentication %}
-        {% endblock authentication %}
+        // Function to apply the theme
+        function applyTheme(theme) {
+          document.body.classList.remove('light-theme', 'dark-theme');
+          document.body.classList.add(theme);
 
-        {% endblock index %}
-        
-    </header>
-    {% include 'components/footer.html' %}
+          for (let i = 0; i < themeBtn.length; i++) {
+            themeBtn[i].classList.remove('light', 'dark');
+            themeBtn[i].classList.add(theme === 'light-theme' ? 'light' : 'dark');
+          }
+        }
 
+        // Load theme from localStorage
+        const initialTheme = localStorage.getItem('theme') || 'light-theme';
+        applyTheme(initialTheme);
+
+        for (let i = 0; i < themeBtn.length; i++) {
+          themeBtn[i].addEventListener('click', function () {
+            const currentTheme = document.body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
+            const newTheme = currentTheme === 'light-theme' ? 'dark-theme' : 'light-theme';
+
+            // Apply the new theme
+            applyTheme(newTheme);
+
+            // Save the new theme to localStorage
+            localStorage.setItem('theme', newTheme);
+          });
+        }
+    </script>
 </body>
 
 <!--- ionicon link-->

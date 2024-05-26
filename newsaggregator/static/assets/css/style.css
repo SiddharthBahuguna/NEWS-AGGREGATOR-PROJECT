@@ -227,7 +227,7 @@ html {
 /*-----------------------------------*\ 
   #HEADER
 \*-----------------------------------*/
-
+.outer-align,
 header { 
   background: var(--background-primary); 
 }

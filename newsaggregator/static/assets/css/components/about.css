@@ -10,7 +10,7 @@
     padding-bottom: 1rem;
 }
 
-
+.contact-us h4,
 .about-us h4{
     color: var(--foreground-primary);
 }
