@@ -245,3 +245,30 @@ def rate_headline(request, headline_id):
         return JsonResponse({'status': 'success', 'average_rating': headline.average_rating, 'rating_count': headline.rating_count})
     return JsonResponse({'status': 'fail'}, status=400)
 
+
+
+
+from django.shortcuts import render
+from .models import Headline
+
+def top_rated_articles(request):
+    if request.user.is_authenticated:
+        top_rated_articles = Headline.objects.filter(average_rating__gte=3.5).order_by('-average_rating')
+    else:
+        top_rated_articles = Headline.objects.none()
+
+    paginator = Paginator(top_rated_articles, 9)  # 9 items per page
+
+    page = request.GET.get('page')
+    try:
+        top_rated_articles_obj = paginator.page(page)
+    except PageNotAnInteger:
+        top_rated_articles_obj = paginator.page(1)
+    except EmptyPage:
+        top_rated_articles_obj = paginator.page(paginator.num_pages)
+
+    context = {
+        'object_list': top_rated_articles_obj,
+        'paginator': paginator
+    }
+    return render(request, 'core/index.html', context)
