@@ -10,7 +10,8 @@ from bs4 import BeautifulSoup as BSoup
 from core.models import Headline
 
 from datetime import datetime
-from core.forms import ContactForm
+
+from core.models import Contact
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 
@@ -134,35 +135,22 @@ def about(request):
     return render(request, "core/about.html", context)
 
 @login_required(login_url='userauths:sign-in')
-def contact(request):
-    today_date = datetime.now().strftime('%Y-%m-%d')
-    if request.method == "POST":
-        form = ContactForm(request.POST)
-        
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            phone = form.cleaned_data['phone']
-            content = form.cleaned_data['content']
+def submit_contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone= request.POST.get('phone')
+        message = request.POST.get('message')
+        contact=Contact()
+        contact.name=name
+        contact.email=email
+        contact.phone=phone
+        contact.message=message
+        contact.save()
+        messages.success(request,"Thanks for contacting us")
+        return redirect("/contact.html")
+    return render(request, "core/contact.html")
 
-            html = render_to_string('components/email.html', {
-                'name': name,
-                'email': email,
-                'phone': phone,
-                'content': content,
-            })
-
-            send_mail("The contact form subject", 'this is the message', email, ['email@gmail.com'], html_message=html)
-            messages.success(request, 'Form submitted successfully!')
-            return redirect("core:index")
-    else:
-        form = ContactForm()
-
-    context={
-        'today_date': today_date,
-        'form': form,
-    }
-    return render(request,"core/contact.html",context)
 
 @login_required(login_url='userauths:sign-in')
 def advertise(request):
