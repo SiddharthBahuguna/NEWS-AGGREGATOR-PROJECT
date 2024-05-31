@@ -34,8 +34,7 @@
                         </div>
                         <div class="">
                             <div class="btns" role="group">
-                                <a href="https://www.instagram.com/share?url={{ record.url }}" target="_blank"
-                                    class="social-icon fa fa-instagram" aria-label="Share on Instagram"></a>
+                                <button class="btn btn-secondary social-icon fa fa-instagram" aria-label="Share on Instagram" onclick="shareOnInstagram('{{ record.url }}')"></button>
                                 <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20link:%20{{ record.url }}"
                                     target="_blank" class="social-icon fa fa-whatsapp"
                                     aria-label="Share on WhatsApp"></a>
@@ -341,6 +340,11 @@
             button.classList.add('btn-danger');
         }
     }
+
+    function shareOnInstagram(url) {
+            copyToClipboard(url);
+            window.location.href = "instagram://";
+        }
 });
 </script>
         
