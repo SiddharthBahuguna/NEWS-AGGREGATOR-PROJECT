@@ -15,4 +15,6 @@ urlpatterns=[
     path('bookmark/<int:headline_id>/', views.bookmark_article, name='bookmark_article'),
     path('bookmarks/', views.view_bookmarks, name='view_bookmarks'),
     path('remove_bookmark/<int:headline_id>/', views.remove_bookmark, name='remove_bookmark'),
+    path('rate_headline/<int:headline_id>/', views.rate_headline, name='rate_headline'),
+
 ]

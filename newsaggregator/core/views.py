@@ -17,7 +17,7 @@ from django.core.mail import send_mail
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
-from core.models import Headline, Bookmark
+from core.models import Headline, Bookmark, Rating
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 
@@ -206,3 +206,42 @@ def remove_bookmark(request, headline_id):
         Bookmark.objects.filter(user=request.user, headline_id=headline_id).delete()
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
+
+import json
+@login_required
+@csrf_exempt
+def rate_headline(request, headline_id):
+    if request.method == 'POST':
+        headline = get_object_or_404(Headline, id=headline_id)
+        
+        try:
+            data = json.loads(request.body)
+            print("Received data:", data)  # Print the entire JSON payload for debugging
+            rating_value_str = data.get('rating')
+            # print("rating_value_str:", rating_value_str)  # Add this line for debugging
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'fail', 'message': 'Invalid JSON'}, status=400)
+
+        if rating_value_str is not None:
+            try:
+                rating_value = int(rating_value_str)
+            except ValueError:
+                return JsonResponse({'status': 'fail', 'message': 'Invalid rating value'}, status=400)
+        else:
+            return JsonResponse({'status': 'fail', 'message': 'Rating value is missing'}, status=400)
+        
+        # Check if the user has already rated this headline
+        rating, created = Rating.objects.get_or_create(user=request.user, headline=headline)
+        rating.rating = rating_value
+        rating.save()
+        
+        # Update headline average rating and rating count
+        ratings = Rating.objects.filter(headline=headline).exclude(rating__isnull=True)
+        headline.rating_count = ratings.count()
+        headline.average_rating = sum(r.rating for r in ratings) / headline.rating_count if headline.rating_count > 0 else 0
+        headline.save()
+
+        return JsonResponse({'status': 'success', 'average_rating': headline.average_rating, 'rating_count': headline.rating_count})
+    return JsonResponse({'status': 'fail'}, status=400)
+
