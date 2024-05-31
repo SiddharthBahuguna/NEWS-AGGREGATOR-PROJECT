@@ -179,30 +179,29 @@ def privacy(request):
     return render(request, "core/privacy.html", context)
 
 
-@login_required
+# @login_required(login_url='userauths:sign-in')
+# def view_bookmarks(request):
+#     # Get the list of bookmarked headlines for the current user
+#     bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
+    
+#     if bookmarks.exists():
+#         context = {'bookmarks': bookmarks}
+#     else:
+#         context = {'message': 'You have no bookmarks yet.'}
+
+#     return render(request, 'core/bookmarks.html', context)
 def view_bookmarks(request):
-     # Get the list of bookmarked headline IDs for the current user
-    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
-    bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
-    context = {
-        'bookmarks': bookmarks,
-        'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
-    }
-    return render(request, 'core/bookmarks.html', context)
-
-@csrf_exempt
-@login_required(login_url='userauths:sign-in')
-def bookmark_article(request, headline_id):
-    if request.method == 'POST':
-        headline = get_object_or_404(Headline, id=headline_id)
-        Bookmark.objects.get_or_create(user=request.user, headline=headline)
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
-
-@csrf_exempt
-@login_required(login_url='userauths:sign-in')
-def remove_bookmark(request, headline_id):
-    if request.method == 'POST':
-        Bookmark.objects.filter(user=request.user, headline_id=headline_id).delete()
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+    if request.user.is_authenticated:
+        # Get the list of bookmarked headlines for the current user
+        bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
+        
+        if bookmarks.exists():
+            context = {'bookmarks': bookmarks}
+        else:
+            context = {'message': 'You have no bookmarks yet.'}
+        
+        return render(request, 'core/bookmarks.html', context)
+    else:
+        message = 'Sign in to view bookmarks.'
+        return render(request, 'core/index.html', {'message': message})
+ 
