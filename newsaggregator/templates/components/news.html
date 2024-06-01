@@ -151,35 +151,7 @@
                     }
                 }
             </style>
-            <br>
-            <div class="demo">
-                <nav class="pagination-outer" aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a {% if object_list.has_previous %} href="?page={{ object_list.previous_page_number }}" class="page-link" {% else %} style="pointer-events: none;" class="page-link disabled" {% endif %} class="page-link" aria-label="Previous">
-                                <span aria-hidden="true">Prev</span>
-                            </a>
-                        </li>
-                        {% for page in paginator.page_range %}
-                        <li class="page-item {% if page == object_list.number %}active{% endif %}">
-                            {% if page == object_list.number %}
-                            <a class="page-link">{{ page }}</a>
-                            {% else %}
-                            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                        <li class="page-item">
-                            <a {% if object_list.has_next %} href="?page={{ object_list.next_page_number }}" class="page-link" {% else %} style="pointer-events: none;" class="page-link disabled" {% endif %} aria-label="Next">
-                                <span aria-hidden="true">Next</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <br>
-        </div>
-    </div>
+            
 
     <!-- News Modal -->
     <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">

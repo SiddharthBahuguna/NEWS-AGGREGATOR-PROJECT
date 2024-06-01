@@ -179,17 +179,32 @@ def privacy(request):
     return render(request, "core/privacy.html", context)
 
 
-@login_required
-def view_bookmarks(request):
-     # Get the list of bookmarked headline IDs for the current user
-    user_bookmarked_headline_ids = request.user.bookmark_set.values_list('headline_id', flat=True)
-    bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
-    context = {
-        'bookmarks': bookmarks,
-        'user_bookmarked_headline_ids': user_bookmarked_headline_ids,
-    }
-    return render(request, 'core/bookmarks.html', context)
+# @login_required(login_url='userauths:sign-in')
+# def view_bookmarks(request):
+#     # Get the list of bookmarked headlines for the current user
+#     bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
+    
+#     if bookmarks.exists():
+#         context = {'bookmarks': bookmarks}
+#     else:
+#         context = {'message': 'You have no bookmarks yet.'}
 
+
+#     return render(request, 'core/bookmarks.html', context)
+def view_bookmarks(request):
+    if request.user.is_authenticated:
+        # Get the list of bookmarked headlines for the current user
+        bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
+        
+        if bookmarks.exists():
+            context = {'bookmarks': bookmarks}
+        else:
+            context = {'message': 'You have no bookmarks yet.'}
+        
+        return render(request, 'core/bookmarks.html', context)
+    else:
+        message = 'Sign in to view bookmarks.'
+        return render(request, 'core/index.html', {'message': message})
 @csrf_exempt
 @login_required(login_url='userauths:sign-in')
 def bookmark_article(request, headline_id):
@@ -206,8 +221,6 @@ def remove_bookmark(request, headline_id):
         Bookmark.objects.filter(user=request.user, headline_id=headline_id).delete()
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
-
-
 import json
 @login_required
 @csrf_exempt
@@ -244,10 +257,6 @@ def rate_headline(request, headline_id):
 
         return JsonResponse({'status': 'success', 'average_rating': headline.average_rating, 'rating_count': headline.rating_count})
     return JsonResponse({'status': 'fail'}, status=400)
-
-
-
-
 from django.shortcuts import render
 from .models import Headline
 
