@@ -4,6 +4,20 @@ from django.db.models.signals import post_delete
 
 from django.dispatch import receiver
 
+from django.core.validators import EmailValidator
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField(validators=[EmailValidator()])
+    phone = models.IntegerField(max_length=10, blank=True)  
+    message= models.TextField(max_length=20, blank=True)
+    
+
+    def __str__(self):
+        return self.name + " - " + self.email
+
+
+
 
 class Headline(models.Model):
   title = models.CharField(max_length=200)#title char(200)
