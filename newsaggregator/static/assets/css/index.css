@@ -1,3 +1,73 @@
 .dropdown-item:hover{
     background-color: #edf2f7;
 }
+
+
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap as needed */
+    width: 100%; /* Make the rating container full width */
+}
+
+.rate {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Adjust the gap as needed */
+    flex-direction: row-reverse; /* Reverse the order of the stars */
+}
+
+.rate input[type="radio"] {
+    display: none; /* Hide the radio buttons */
+}
+
+.rate label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.rate label:before {
+    content: '☆';
+    font-size: 1.5em; /* Adjust the size as needed */
+    margin-right: 2px;
+}
+
+/* Ensure all previous stars are filled when hovering or checked */
+.rate input[type="radio"]:checked ~ label:before,
+.rate input[type="radio"]:checked + label:before,
+.rate input[type="radio"]:checked + label ~ label:before {
+    content: '★';
+    color: gold; /* Adjust the color as needed */
+}
+
+.rate label:hover ~ label:before,
+.rate label:hover:before {
+    content: '★';
+    color: gold;
+}
+
+.submit-btn {
+    padding: 3px 6px; /* Make the button smaller */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto; /* Push the button to the rightmost end */
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.average-rating {
+    margin-left: 10px; /* Adjust the margin as needed */
+}

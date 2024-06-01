@@ -2,16 +2,20 @@
 {% load static %}
 
 {% block category %}
-{% include 'components/category-btn.html' %}
+    {% include 'components/category-btn.html' %}
 {% endblock category %}
-{% if messages %}
-{% for message in messages %}
-    <div class="alert alert-success" role="alert">
-        {{ message }}
-    </div>
-{% endfor %}
-{% endif %}
 
 {% block index %}
-{% include 'components/news.html' %}
+    {% include 'components/news.html' %}
+    
+    {% if not request.user.is_authenticated %}
+        <div class="alert alert-info" role="alert" style="background-color: #ffffff; border-color: #ffffff; color: #333333;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <p style="font-family: Teko, sans-serif; font-size: 30px; color: #007bff;">Register To View Bookmarks</p>
+                <img style="width: 28em; margin: 10px 0; flex-shrink: 0;" src="{% static 'assets/images/bookmarks-animate.svg' %}" alt="">
+                <a href="{% url 'userauths:sign-in' %}" class="btn btn-primary">Sign-in/Sign-up</a>
+            </div>
+        </div>
+    {% endif %}
 {% endblock index %}
+

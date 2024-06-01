@@ -13,9 +13,13 @@ urlpatterns=[
     path('privacy/',views.privacy,name='privacy'),
     path('scrape/<str:name>', views.scrape, name="scrape"),
     
-
-    # bookmarking
-    path('bookmark/<int:headline_id>/', views.bookmark_article, name='bookmark_article'),
+        # bookmarking
     path('bookmarks/', views.view_bookmarks, name='view_bookmarks'),
+
     path('remove_bookmark/<int:headline_id>/', views.remove_bookmark, name='remove_bookmark'),
+    path('rate_headline/<int:headline_id>/', views.rate_headline, name='rate_headline'),
+
+    path('top-rated/', views.top_rated_articles, name='top_rated_articles'),
+
+
 ]
