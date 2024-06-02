@@ -65,6 +65,7 @@ def news_list(request):
     headlines = Headline.objects.all().order_by('-id')
     swiper = Headline.objects.all()[:4]
 
+
     # Get the list of bookmarked headline IDs for the current user
     user_bookmarked_headline_ids = []
     if request.user.is_authenticated:
@@ -269,3 +270,8 @@ def top_rated_articles(request):
         'paginator': paginator
     }
     return render(request, 'core/index.html', context)
+from django.shortcuts import render
+
+def about(request):
+    return render(request, 'core/about.html')
+

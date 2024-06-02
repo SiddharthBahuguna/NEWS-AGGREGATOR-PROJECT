@@ -4,9 +4,11 @@ from .views import submit_contact
 
 app_name='core'
 
+    
+
 urlpatterns=[
     path('',views.news_list,name='index'),
-    path('about/',views.about,name='about'),
+    path('about/', views.about, name='about'),
     path('contact.html/',views.submit_contact,name='contact'),
    
     path('advertise/',views.advertise,name='advertise'),
