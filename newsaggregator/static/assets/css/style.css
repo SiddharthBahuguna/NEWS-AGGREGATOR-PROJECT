@@ -236,7 +236,28 @@ header {
 header .flex-wrapper { display: none; }
 
 
-.navbar-section {
+/* The navigation bar */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+  z-index:1000;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  /* padding: 14px 16px; */
+  text-decoration: none;
+}
+
+
+/* .navbar-section {
   padding-left: 3rem;
   padding-right: 3rem;
   border-bottom: 1px solid var(--action-primary);
@@ -249,12 +270,12 @@ header .flex-wrapper { display: none; }
   align-items:     center;
   gap: 15px;
   padding: 15px 0;
-}
+} */
 
 .dropdown {
-  padding-top: 2rem;
+  padding-top: 7rem;
   padding-right: 1rem;
-  padding-bottom: 1rem;;
+  padding-bottom: 1rem;
 }
 
 .logo-container {
