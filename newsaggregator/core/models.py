@@ -9,7 +9,7 @@ from django.core.validators import EmailValidator
 class Contact(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(validators=[EmailValidator()])
-    phone = models.IntegerField(max_length=10, blank=True)  
+    phone = models.IntegerField(blank=True)  
     message= models.TextField(max_length=20, blank=True)
     
 

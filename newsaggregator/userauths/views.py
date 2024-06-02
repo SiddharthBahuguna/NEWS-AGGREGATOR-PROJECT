@@ -29,6 +29,7 @@ def register_view(request):
     return render(request, 'userauths/sign-up.html', context)
 
 def login_view(request):
+    
     if request.user.is_authenticated:
         messages.warning(request,f"Hey, You are already Logged in")
         return redirect('core:index')
@@ -41,20 +42,23 @@ def login_view(request):
                 user=User.object.get(email=email)
             except:
                 messages.warning(request,f"User with {email} does not exist")
+                
 
             user=authenticate(request,email=email,password=password)
 
             if user is not None:
-                login(request,user)
-                messages.success(request,"Your are logged in.")
+                login(request,user)             
                 return redirect("core:index")
             
             else:
-                messages.warning(request,"User Does not exist, create an accounnt")
+                messages.warning(request,"User Does not exist, create an account")
+                
     return render(request,"userauths/sign-in.html")
 
 
 def logout_view(request):
+   
     logout(request)
     messages.success(request, "You Logged-Out, successfully")
-    return redirect("userauths:sign-in")
+    
+    return redirect("userauths:sign-in",)

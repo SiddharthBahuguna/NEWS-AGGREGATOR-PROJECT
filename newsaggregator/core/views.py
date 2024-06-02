@@ -167,18 +167,18 @@ def privacy(request):
     return render(request, "core/privacy.html", context)
 
 
-# @login_required(login_url='userauths:sign-in')
-# def view_bookmarks(request):
-#     # Get the list of bookmarked headlines for the current user
-#     bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
+@login_required(login_url='userauths:sign-in')
+def view_bookmarks(request):
+     # Get the list of bookmarked headlines for the current user
+     bookmarks = Bookmark.objects.filter(user=request.user).select_related('headline')
     
-#     if bookmarks.exists():
-#         context = {'bookmarks': bookmarks}
-#     else:
-#         context = {'message': 'You have no bookmarks yet.'}
+     if bookmarks.exists():
+         context = {'bookmarks': bookmarks}
+     else:
+         context = {'message': 'You have no bookmarks yet.'}
 
 
-#     return render(request, 'core/bookmarks.html', context)
+     return render(request, 'core/bookmarks.html', context)
 def view_bookmarks(request):
     if request.user.is_authenticated:
         # Get the list of bookmarked headlines for the current user
