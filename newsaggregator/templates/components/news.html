@@ -5,8 +5,14 @@
 <div class="container">
     {% include 'components/swiperjs.html' %}
 
+     <!-- Display a welcome message for authenticated users -->
+     <div class="alert alert-success" role="alert">
+        <p>Welcome back, {{ request.user.username }}! Enjoy your bookmarks.</p>
+    </div>
     <div class="row mt-2 p-2">
+        
         {% for record in object_list %}
+       
         <div class="col-12 col-md-6 col-lg-4 mb-4 newscard">
             <div class="card h-100">
                 <img style="max-height: 11em;" class="card-img-top" src="{{ record.image }}" alt="News Image" loading="lazy">
@@ -153,7 +159,7 @@
             </style>
             
 
-    <!-- News Modal -->
+    <!-- <!-- News Modal 
     <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -168,7 +174,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Report Modal -->
     <div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">

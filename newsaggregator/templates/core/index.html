@@ -12,8 +12,10 @@
 <!-- Define the index block -->
 {% block index %}
     <!-- Include the news component -->
+   
     {% include 'components/news.html' %}
     
+     
     <!-- Check if the user is not authenticated -->
     {% if not request.user.is_authenticated %}
         <!-- Display a message encouraging the user to register -->
@@ -27,9 +29,6 @@
             </div>
         </div>
     {% else %}
-        <!-- Display a welcome message for authenticated users -->
-        <div class="alert alert-success" role="alert">
-            <p>Welcome back, {{ request.user.username }}! Enjoy your bookmarks.</p>
-        </div>
+        
     {% endif %}
 {% endblock index %}
