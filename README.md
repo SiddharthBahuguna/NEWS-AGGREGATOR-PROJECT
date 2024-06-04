@@ -84,5 +84,12 @@ git push -u origin <your_branch_name>
 
 13. Congratulations! 🎉 you've made your contribution.
 
+# Common mistakes to avoid...
 
+Here are some common mistakes and issues to watch out for:
+1. Missing virtual environment activation: Ensure you activate the virtual environment before installing dependencies.
+2. Branch naming consistency: Ensure the branch name is the same when creating and pushing the branch.
+3. Commit messages: Use descriptive commit messages to make the purpose of changes clear.
+4. Pull request details: When creating the pull request, provide a detailed description of the changes and why they are necessary.
+5. By following these steps carefully, you should be able to contribute successfully to the repository.
 
