@@ -538,7 +538,7 @@ footer {
  }
 
 footer .footer-section {
-  padding-top: 1rem;
+  padding-top: 10px;
   display: flex;
   justify-content: space-evenly;
   grid-template-columns: 1fr;
@@ -580,6 +580,7 @@ footer .wrapper { text-align: center; }
   font-size: var(--fs-4);
   text-align: center;
   padding-bottom: 1rem;
+  background-color: blue;
   /* border-top: 1px solid var(--action-primary); */
 }
 
@@ -1136,4 +1137,7 @@ footer .wrapper { text-align: center; }
 .light-theme .bio-content p,
 .light-theme .ck-content p{
   color: var(--foreground-secondary);
+}
+.hr-container{
+  background-color: blue;
 }
