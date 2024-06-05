@@ -12,10 +12,17 @@
 <!-- Define the index block -->
 {% block index %}
     <!-- Include the news component -->
+   
     {% include 'components/news.html' %}
     
+
     {% comment %} <!-- Check if the user is not authenticated -->
     {% if not request.user.is_authenticated %} {% endcomment %}
+
+     
+    <!-- Check if the user is not authenticated -->
+    {% if not request.user.is_authenticated %}
+
         <!-- Display a message encouraging the user to register -->
         {% comment %} <div class="alert alert-info" role="alert" style="background-color: #ffffff; border-color: #ffffff; color: #333333;">
             <div style="display: flex; flex-direction: column; align-items: center;">
@@ -25,6 +32,7 @@
                 <!-- Provide a sign-in/sign-up button -->
                 <a class="btn btn-primary" href="{% url 'userauths:sign-in' %}" role="button">Sign-in/Sign-up</a>
             </div>
+
         </div> {% endcomment %}
     {% comment %} {% else %} {% endcomment %}
         <!-- Display a welcome message for authenticated users -->
@@ -32,4 +40,10 @@
             <p>Welcome back, {{ request.user.username }}! Enjoy your bookmarks.</p>
         </div> {% endcomment %}
     {% comment %} {% endif %} {% endcomment %}
+
+        </div>
+    {% else %}
+        
+    {% endif %}
+
 {% endblock index %}
