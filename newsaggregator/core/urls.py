@@ -1,12 +1,15 @@
 from django.urls import path
 from core import views
 from .views import submit_contact
+# from .views import base_view
+from .views import news_list
 
 app_name='core'
 
     
 
 urlpatterns=[
+    # path('base/', base_view, name='base'),
     path('',views.news_list,name='index'),
     path('about/', views.about, name='about'),
     path('contact.html/',views.submit_contact,name='contact'),

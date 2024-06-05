@@ -1,5 +1,5 @@
 <!-- Extend the base template -->
-{% extends 'partials/base.html' %}
+{% extends 'core/base.html' %}
 
 <!-- Load the static files -->
 {% load static %}
@@ -14,10 +14,10 @@
     <!-- Include the news component -->
     {% include 'components/news.html' %}
     
-    <!-- Check if the user is not authenticated -->
-    {% if not request.user.is_authenticated %}
+    {% comment %} <!-- Check if the user is not authenticated -->
+    {% if not request.user.is_authenticated %} {% endcomment %}
         <!-- Display a message encouraging the user to register -->
-        <div class="alert alert-info" role="alert" style="background-color: #ffffff; border-color: #ffffff; color: #333333;">
+        {% comment %} <div class="alert alert-info" role="alert" style="background-color: #ffffff; border-color: #ffffff; color: #333333;">
             <div style="display: flex; flex-direction: column; align-items: center;">
                 <p style="font-family: Teko, sans-serif; font-size: 30px; color: #007bff;">Register To View Bookmarks</p>
                 <!-- Display an image -->
@@ -25,11 +25,11 @@
                 <!-- Provide a sign-in/sign-up button -->
                 <a class="btn btn-primary" href="{% url 'userauths:sign-in' %}" role="button">Sign-in/Sign-up</a>
             </div>
-        </div>
-    {% else %}
+        </div> {% endcomment %}
+    {% comment %} {% else %} {% endcomment %}
         <!-- Display a welcome message for authenticated users -->
-        <div class="alert alert-success" role="alert">
+        {% comment %} <div class="alert alert-success" role="alert">
             <p>Welcome back, {{ request.user.username }}! Enjoy your bookmarks.</p>
-        </div>
-    {% endif %}
+        </div> {% endcomment %}
+    {% comment %} {% endif %} {% endcomment %}
 {% endblock index %}
