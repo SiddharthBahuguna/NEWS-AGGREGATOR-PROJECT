@@ -84,7 +84,7 @@ def news_list(request):
     return render(request, "core/index.html", context)
 
 
-# @custom_login_required
+@custom_login_required
 def index(request):
     Headline.objects.all().delete()
     session = requests.Session()

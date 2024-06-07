@@ -2,10 +2,12 @@
 <nav class="navbar">
     <a href="{% url 'core:index' %}">
         <span class="logo-light">
-            <span class="logo-container"><img src="{% static './assets/images/news.png' %}" alt="logo" width="70" />Onion News</span>
+            <span class="logo-container"><img src="{% static './assets/images/news.png' %}" alt="logo"
+                    width="70" />Onion News</span>
         </span>
         <span class="logo-dark">
-            <span class="logo-container"><img src="{% static './assets/images/news.png' %}" alt="logo" width="70" />Onion News</span>
+            <span class="logo-container"><img src="{% static './assets/images/news.png' %}" alt="logo"
+                    width="70" />Onion News</span>
         </span>
     </a>
     <div class="btn-group">
@@ -22,29 +24,29 @@
     <div class="flex-wrapper">
         <ul class="desktop-nav">
             <!-- Start of list item for Home link -->
-<li>
-    <!-- Link to the Home page. The URL is generated using Django's url template tag, which takes the name of a view function or a URL pattern name. -->
-    <a href="{% url 'core:index' %}" class="nav-link">Home</a>
-</li>
+            <li {% if not request.user.is_authenticated %} style="pointer-events: none;" {% endif %}>
+                <!-- Link to the Home page. The URL is generated using Django's url template tag, which takes the name of a view function or a URL pattern name. -->
+                <a {% if request.user.is_authenticated %} href="{% url 'core:index' %}" {% endif %} class="nav-link">Home</a>
+            </li>
 
-<!-- Start of list item for My Bookmarks link -->
-<li class="nav-item">
-    <!-- Link to the My Bookmarks page. The URL is generated using Django's url template tag. -->
-    <a href="{% url 'core:view_bookmarks' %}" class="nav-link">My Bookmarks</a>
-</li>
+            <!-- Start of list item for My Bookmarks link -->
+            <li {% if not request.user.is_authenticated %} style="pointer-events: none;" {% endif %}>
+                <!-- Link to the My Bookmarks page. The URL is generated using Django's url template tag. -->
+                <a {% if request.user.is_authenticated %} href="{% url 'core:view_bookmarks' %}" {% endif %} class="nav-link">My Bookmarks</a>
+            </li>
 
-<!-- Start of list item for About Us link -->
-<li>
-    <!-- Link to the About Us page. The URL is generated using Django's url template tag. -->
-    <a href="{% url 'core:about' %}" class="nav-link">About Us</a>
-</li>
+            <!-- Start of list item for About Us link -->
+            <li>
+                <!-- Link to the About Us page. The URL is generated using Django's url template tag. -->
+                <a href="{% url 'core:about' %}" class="nav-link">About Us</a>
+            </li>
 
-<!-- Start of list item for Contact link -->
-<li>
-    <!-- Link to the Contact page. The URL is generated using Django's url template tag. -->
-    <a href="{% url 'core:contact' %}" class="nav-link">Contact</a>
-</li>
-<li>
+            <!-- Start of list item for Contact link -->
+            <li>
+                <!-- Link to the Contact page. The URL is generated using Django's url template tag. -->
+                <a href="{% url 'core:contact' %}" class="nav-link">Contact</a>
+            </li>
+            <li>
                 {% if not request.user.is_authenticated %}
                 <a href="{% url 'userauths:sign-up' %}" class="nav-link">Sign-in/Sign-up</a>
                 {% else %}

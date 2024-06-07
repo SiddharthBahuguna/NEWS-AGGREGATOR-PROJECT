@@ -6,5 +6,5 @@ window.addEventListener('load', function() {
     setTimeout(() => {
         preloader.style.display = 'none';
         mainContent.style.display = 'flex';
-    }, 2000); // Adjust the delay time (in milliseconds) as needed
+    }, 100); // Adjust the delay time (in milliseconds) as needed
 });
