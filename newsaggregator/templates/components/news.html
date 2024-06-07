@@ -46,7 +46,11 @@
                                 </div>
                                 <button class="submit-btn" onclick="submitRating('{{ record.id }}')">Submit</button>
                             </div>
-                        
+                            <div class="read-aloud-controls">
+                                <button class="btn btn-primary" onclick="startReadAloud('{{ record.url }}', '{{ record.title }}')">Start</button>
+                                <button id="pause-resume-btn" class="btn btn-warning" onclick="pauseReadAloud(this)">Pause</button>
+                                <button class="btn btn-danger" onclick="stopReadAloud()">Stop</button>
+                            </div>
                         
                         
                         <style>
