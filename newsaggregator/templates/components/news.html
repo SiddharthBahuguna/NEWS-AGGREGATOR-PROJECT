@@ -46,12 +46,12 @@
                                 </div>
                                 <button class="submit-btn" onclick="submitRating('{{ record.id }}')">Submit</button>
                             </div>
-                            <div class="read-aloud-controls">
+
+                            <div class="read-aloud-controls" style="display: flex; justify-content: space-between; width: 100%;">
                                 <button class="btn btn-primary" onclick="startReadAloud('{{ record.url }}', '{{ record.title }}')">Start</button>
                                 <button id="pause-resume-btn" class="btn btn-warning" onclick="pauseReadAloud(this)">Pause</button>
                                 <button class="btn btn-danger" onclick="stopReadAloud()">Stop</button>
                             </div>
-                        
                         
                         <style>
                             .bookmark-btn i{
@@ -60,38 +60,32 @@
                                 justify-content: center;
                             }
                         </style>
+   
                         <div class="">
-                            <button class="btn btn-secondary" onclick="copyToClipboard('{{ record.url }}')"
-                                aria-label="Copy URL">
-                                Copy
-                            </button>
-                        </div>
-                        <div class="">
-                            <div class="btns" role="group">
-                                <!-- <a href="https://www.instagram.com/share?url={{ record.url }}" target="_blank"
-                                    class="social-icon fa fa-instagram" aria-label="Share on Instagram"></a> -->
-                                <a class="btn btn-secondary social-icon fa fa-instagram" aria-label="Share on Instagram" onclick="shareOnInstagram('{{ record.url }}')"></a>
-                                <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20link:%20{{ record.url }}"
-                                    target="_blank" class="social-icon fa fa-whatsapp"
-                                    aria-label="Share on WhatsApp"></a>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ record.url }}" target="_blank"
-                                    class="social-icon fa fa-facebook" aria-label="Share on Facebook"></a>
-                                <a style="display: flex;align-items: center;justify-content: center;border: 2px solid var(--foreground-tertiary);padding: 0;min-width: 30px!important;width: 30px;height: 30px;" class="btn bookmark-btn" data-id="{{ record.id }}" data-bookmarked="{% if record.id in user_bookmarked_headline_ids %}true{% else %}false{% endif %}" aria-label="Bookmark">
+                            <div style="display: flex; align-items: center; gap: 1px; flex-wrap: nowrap;">
+                                <button class="btn btn-secondary" onclick="copyToClipboard('{{ record.url }}')" aria-label="Copy URL">
+                                    Copy
+                                </button>
+                                <a style="display: flex; align-items: center; justify-content: center; border: 2px solid var(--foreground-tertiary); padding: 0; min-width: 30px!important; width: 30px; height: 30px;" class="btn bookmark-btn" data-id="{{ record.id }}" data-bookmarked="{% if record.id in user_bookmarked_headline_ids %}true{% else %}false{% endif %}" aria-label="Bookmark">
                                     {% if record.id in user_bookmarked_headline_ids %}
                                     <i class="social-icon fa solid fa-bookmark"></i>
                                     {% else %}
                                     <i class="social-icon fa fa-bookmark"></i>
                                     {% endif %}
                                 </a>
-                                </div>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#reportModal" aria-label="Report">
+                                    Report
+                                </button>
+                                <a class="social-icon fa fa-instagram" style="font-size: 24px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 0.7px solid var(--foreground-tertiary);" aria-label="Share on Instagram" onclick="shareOnInstagram('{{ record.url }}')"></a>
+                                <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20link:%20{{ record.url }}" target="_blank" class="social-icon fa fa-whatsapp" style="font-size: 24px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 0.7px solid var(--foreground-tertiary);" aria-label="Share on WhatsApp"></a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ record.url }}" target="_blank" class="social-icon fa fa-facebook" style="font-size: 24px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 0.7px solid var(--foreground-tertiary);" aria-label="Share on Facebook"></a>
+                                
+                            </div>
+                            
+                            
                         </div>
                         
-                        <div class="">
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#reportModal"
-                                aria-label="Report">
-                                Report
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>
