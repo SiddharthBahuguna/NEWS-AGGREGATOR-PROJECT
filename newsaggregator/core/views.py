@@ -63,7 +63,6 @@ def scrape(request, name):
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Headline
-
 def news_list(request):
     headlines = Headline.objects.all().order_by('-id')
     swiper = Headline.objects.all()[:4]
@@ -205,3 +204,23 @@ def top_rated_articles(request):
     top_rated_articles = Headline.objects.filter(average_rating__gte=3.5).order_by('-average_rating')
     paginator = Paginator(top_rated_articles, 9)
     page = request
+
+
+
+
+import requests
+from django.http import JsonResponse
+
+def fetch_article_content(request):
+    url = request.GET.get('url')
+    if not url:
+        return JsonResponse({'error': 'URL parameter is missing'}, status=400)
+
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        content = response.text
+    except requests.RequestException as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'content': content})

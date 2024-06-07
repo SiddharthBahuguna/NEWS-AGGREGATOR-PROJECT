@@ -3,6 +3,8 @@ from core import views
 from .views import submit_contact
 # from .views import base_view
 from .views import news_list
+from django.urls import path
+from .views import fetch_article_content
 
 app_name='core'
 
@@ -25,6 +27,9 @@ urlpatterns=[
     path('rate_headline/<int:headline_id>/', views.rate_headline, name='rate_headline'),
 
     path('top-rated/', views.top_rated_articles, name='top_rated_articles'),
+
+# speech
+    path('fetch_article_content/', fetch_article_content, name='fetch_article_content'),
 
 
 ]
