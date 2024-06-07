@@ -1,4 +1,4 @@
-{% extends 'core/base.html' %}
+{% extends 'partials/base.html' %}
 {% load static %}
 
 {% block index %}
@@ -6,16 +6,10 @@
 
 <!------ Include the above in your HEAD tag ---------->
 <main>
-        <div class="container" style="padding-top:100px">
+        <div class="container">
 
             <div class="col-md-12">
                 <br>
-                {%for msg in messages%} 
-                <div class="alert alert-success d-flex align-items-center" role="alert" style="height:50px">
-                    <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-                    <div>{{msg}}</div></div>
-                  
-                {%endfor%}
                 <h2 class="h2">Contact Me</h2>
 
                 <div class="blog-card-group">
@@ -27,34 +21,26 @@
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="name">
-                                            <label for="name"></label>
-                                            <input type="text" placeholder="Your name is" name="name" id="name_input" required>
-                                          </div>
-                                          <div class="email">
-                                            <label for="email"></label>
-                                            <input type="email" placeholder="Your e-mail is" name="email" id="email_input" required>
-                                          </div>
-                                          <div class="phone">
-                                            <label for="phone number"></label>
-                                            <input type="text" placeholder="Your Phone Number" name="phone" id="phone_input" required>
+                                        <div class="form-group">
+                                            {{form.name}}
+                                        </div>
+                                        <div class="form-group">
+                                            {{form.email}}
+                                        </div>
+                                        <div class="form-group">
+                                            {{form.phone}}
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{form.content}}
                                         </div>
                                     </div>
-                                    <div class="col-md-6">                                   
-                                          <div class="message">
-                                            <label for="message"></label>
-                                            <textarea name="message" placeholder="I'd like to chat about" id="message_input" cols="30" rows="5" required></textarea>
-                                          </div>
-                                        </div>
-
                                     <div class="form-group">
-                                    </br>
-
-                                                                             
                                         <button class="btn btn-secondary" type="submit"
                                         style="width: min-content;padding: .2em;border: 1px solid #a0aec0;border-bottom: 2px solid #a0aec0;">Submit</button>
-                                  
-                                </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -62,7 +48,6 @@
 
                     </div>
                 </div>
-                
 
 
 

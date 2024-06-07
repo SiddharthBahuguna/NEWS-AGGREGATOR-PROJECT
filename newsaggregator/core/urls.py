@@ -1,6 +1,5 @@
 from django.urls import path
 from core import views
-from .views import submit_contact
 # from .views import base_view
 from .views import news_list
 
@@ -12,7 +11,7 @@ urlpatterns=[
     # path('base/', base_view, name='base'),
     path('',views.news_list,name='index'),
     path('about/', views.about, name='about'),
-    path('contact.html/',views.submit_contact,name='contact'),
+    path('contact/',views.contact,name='contact'),
    
     path('advertise/',views.advertise,name='advertise'),
     path('privacy/',views.privacy,name='privacy'),
