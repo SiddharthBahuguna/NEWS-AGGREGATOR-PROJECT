@@ -1,6 +1,8 @@
 from django.urls import path
 from core import views
 # from .views import base_view
+from .views import fetch_article_content
+
 from .views import news_list
 
 app_name='core'
@@ -25,5 +27,6 @@ urlpatterns=[
 
     path('top-rated/', views.top_rated_articles, name='top_rated_articles'),
 
+    path('fetch_article_content/', fetch_article_content, name='fetch_article_content'),
 
 ]
