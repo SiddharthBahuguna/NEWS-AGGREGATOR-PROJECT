@@ -1,9 +1,13 @@
 window.addEventListener('load', function() {
-    const preloader = document.getElementById('preloader');
-    const mainContent = document.querySelector('.outer-align');
+    const preloader = document.querySelector('.loader');
+    const mainContentlight = document.querySelector('.light-theme');
+    const mainContentdark = document.querySelector('.dark-theme');
 
     setTimeout(() => {
         preloader.style.display = 'none';
-        mainContent.style.display = 'flex';
+        mainContentlight.style.pointerEvents = 'all';
+        mainContentlight.style.overflow = 'auto';
+        mainContentdark.style.pointerEvents = 'all';
+        mainContentdark.style.overflow = 'auto';
     }, 100);
 });
