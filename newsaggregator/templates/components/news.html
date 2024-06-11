@@ -43,7 +43,9 @@
                                 {% if record.average_rating %}
                                     ({{ record.average_rating }})
                                 {% endif %}
-                            <button style="font-size: 16px; display: flex; align-items: center; justify-content: center; min-width: 30px!important; height: 30px!important; border-radius: 50%; border: 2px solid var(--foreground-tertiary);" class="submit-btn" onclick="submitRating('{{ record.id }}')"><span class="material-symbols-outlined"> check </span></button>
+                                <button id="submit-btn-{{ record.id }}" style="font-size: 16px; display: flex; align-items: center; justify-content: center; min-width: 30px!important; height: 30px!important; border-radius: 50%; border: 2px solid var(--foreground-tertiary);" class="submit-btn" onclick="submitRating('{{ record.id }}')">
+                                    <span class="material-symbols-outlined">check</span>
+                                </button>
                             </div>
                         </div>
 
