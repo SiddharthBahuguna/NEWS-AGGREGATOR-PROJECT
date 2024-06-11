@@ -60,7 +60,15 @@
 }
 
 
-
+.goog-te-combo{
+  border-radius: 5px;
+  padding: 4px;
+  color: var(--foreground-tertiary);
+}
+.VIpgJd-ZVi9od-l4eHX-hSRGPd img{
+  width: 90px;
+  height: 40px;
+}
 
 
 /*-----------------------------------*\ 
@@ -522,7 +530,7 @@ footer .footer-section {
 
 }
 
-footer .wrapper { text-align: center; }
+footer .wrapper { text-align: center;padding: 0; }
 
 .footer-logo { margin-bottom: 10px; }
 

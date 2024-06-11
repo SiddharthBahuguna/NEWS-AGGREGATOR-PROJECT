@@ -1,7 +1,7 @@
 {% load static %}
-<footer>
-    <div class="footer-section">
-        <div class="wrapper">
+<footer class="container">
+    <div class="footer-section row" style="justify-content: space-between;">
+        <div class="wrapper col-md-3 col-12">
             <a href="#" class="footer-logo">
                 <span class="logo-light">
                     <span class="logo-container"><img src="{% static './assets/images/news.png' %}" alt="logo" width="70" />Onion News</span>
@@ -16,7 +16,7 @@
             </p>
         </div>
 
-        <div class="wrapper">
+        <div class="wrapper col-md-3 col-12" style="justify-content: center;display: flex;">
             <div id="google_element"></div>
             <script src="https://translate.google.com/translate_a/element.js?cb=loadGoogleTranslate"></script>
             <script>
@@ -28,7 +28,7 @@
             </script>
         </div>
 
-        <div class="wrapper">
+        <div class="wrapper col-md-3 col-12" style="display: flex;justify-content: space-around;flex-direction: column;">
             <p class="footer-title">Legal Stuff</p>
             <ul>
                 <li>
