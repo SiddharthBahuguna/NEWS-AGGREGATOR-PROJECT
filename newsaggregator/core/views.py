@@ -1,3 +1,4 @@
+import json
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse
@@ -7,7 +8,7 @@ from django.shortcuts import render
 import requests
 from django.shortcuts import render, redirect
 from bs4 import BeautifulSoup as BSoup
-from core.models import Headline
+from core.models import Headline, Rating
 
 from datetime import datetime
 from core.forms import ContactForm
@@ -224,14 +225,18 @@ def rate_headline(request, headline_id):
                 return JsonResponse({'status': 'fail', 'message': 'Invalid rating value'}, status=400)
         else:
             return JsonResponse({'status': 'fail', 'message': 'Rating value is missing'}, status=400)
+
         rating, created = Rating.objects.get_or_create(user=request.user, headline=headline)
         rating.rating = rating_value
         rating.save()
+
         ratings = Rating.objects.filter(headline=headline).exclude(rating__isnull=True)
         headline.rating_count = ratings.count()
         headline.average_rating = sum(r.rating for r in ratings) / headline.rating_count if headline.rating_count > 0 else 0
         headline.save()
+
         return JsonResponse({'status': 'success', 'average_rating': headline.average_rating, 'rating_count': headline.rating_count})
+
     return JsonResponse({'status': 'fail'}, status=400)
 
 # @custom_login_required

@@ -24,7 +24,6 @@ urlpatterns=[
 
     path('remove_bookmark/<int:headline_id>/', views.remove_bookmark, name='remove_bookmark'),
     path('rate_headline/<int:headline_id>/', views.rate_headline, name='rate_headline'),
-
     path('top-rated/', views.top_rated_articles, name='top_rated_articles'),
 
     path('fetch_article_content/', fetch_article_content, name='fetch_article_content'),

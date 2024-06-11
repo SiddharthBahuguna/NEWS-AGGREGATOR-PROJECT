@@ -14,14 +14,14 @@
 .rating-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Adjust the gap as needed */
+    gap: 2px; /* Adjust the gap as needed */
     width: 100%; /* Make the rating container full width */
 }
 
 .rate {
     display: flex;
     align-items: center;
-    gap: 5px; /* Adjust the gap as needed */
+    gap: 2px; /* Adjust the gap as needed */
     flex-direction: row-reverse; /* Reverse the order of the stars */
 }
 
@@ -55,7 +55,6 @@
 }
 
 .submit-btn {
-    padding: 3px 6px; /* Make the button smaller */
     background-color: #007bff;
     color: white;
     border: none;
@@ -69,5 +68,9 @@
 }
 
 .average-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     margin-left: 10px; /* Adjust the margin as needed */
 }
