@@ -58,8 +58,12 @@
   --py: 5rem;
 
 }
-
-
+.alert-success{
+  padding: 5px;
+}
+.alert-success p{
+  margin: 0;
+}
 .goog-te-combo{
   border-radius: 5px;
   padding: 4px;

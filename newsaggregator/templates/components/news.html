@@ -40,17 +40,17 @@
                                 <label for="star1-{{ record.id }}"></label>
                             </div>
                             <div class="average-rating" id="average-rating-{{ record.id }}">
-                            {% if record.average_rating %}
-                                ({{ record.average_rating }})
+                                {% if record.average_rating %}
+                                    ({{ record.average_rating }})
                                 {% endif %}
+                            <button style="font-size: 16px; display: flex; align-items: center; justify-content: center; min-width: 30px!important; height: 30px!important; border-radius: 50%; border: 2px solid var(--foreground-tertiary);" class="submit-btn" onclick="submitRating('{{ record.id }}')"><span class="material-symbols-outlined"> check </span></button>
                             </div>
-                            <button class="submit-btn" onclick="submitRating('{{ record.id }}')">Submit</button>
                         </div>
 
-                        <div class="read-aloud-controls" style="display: flex; justify-content: space-between; width: 100%;">
-                            <button class="btn btn-primary" onclick="startReadAloud('{{ record.url }}', '{{ record.title }}')">Start</button>
-                            <button id="pause-resume-btn" class="btn btn-warning" onclick="pauseReadAloud(this)">Pause</button>
-                            <button class="btn btn-danger" onclick="stopReadAloud()">Stop</button>
+                        <div class="read-aloud-controls" style="display: flex; justify-content: left;gap: 5px; width: 100%;margin-bottom: 5px;">
+                            <a class="btn btn-danger play-btn" onclick="startReadAloud('{{ record.url }}', '{{ record.title }}')" style="font-size: 16px; display: flex; align-items: center; justify-content: center; min-width: 30px!important; height: 30px!important; border-radius: 50%; border: 2px solid var(--foreground-tertiary);"><span class="material-symbols-outlined"> play_arrow </span></a>
+                            <a id="pause-resume-btn" class="btn btn-danger pause-btn" onclick="pauseReadAloud(this)" style="font-size: 16px; display: flex; align-items: center; justify-content: center; min-width: 30px!important; height: 30px!important; border-radius: 50%; border: 2px solid var(--foreground-tertiary);"><span class="material-symbols-outlined"> pause </span></a>
+                            <a class="btn btn-danger stop-btn" onclick="stopReadAloud()"  style="font-size: 16px; display: flex; align-items: center; justify-content: center; min-width: 30px!important; height: 30px!important; border-radius: 50%; border: 2px solid var(--foreground-tertiary);"><span class="material-symbols-outlined"> stop </span></a>
                         </div>
                         
                         
@@ -64,23 +64,23 @@
                         </style>
 
                         <div class="">
-                            <div style="display: flex; align-items: center; gap: 1px; flex-wrap: nowrap;">
-                                <button class="btn btn-secondary" onclick="copyToClipboard('{{ record.url }}')" aria-label="Copy URL">
-                                    Copy
-                                </button>
+                            <div style="display: flex; align-items: center; gap: 5px; flex-wrap: nowrap;">
                                 <a style="display: flex; align-items: center; justify-content: center; border: 2px solid var(--foreground-tertiary); padding: 0; min-width: 30px!important; width: 30px; height: 30px;" class="btn bookmark-btn" data-id="{{ record.id }}" data-bookmarked="{% if record.id in user_bookmarked_headline_ids %}true{% else %}false{% endif %}" aria-label="Bookmark">
                                     {% if record.id in user_bookmarked_headline_ids %}
-                                    <i class="social-icon fa solid fa-bookmark"></i>
+                                    <i style="font-size: 16px;" class="social-icon fa solid fa-bookmark"></i>
                                     {% else %}
-                                    <i class="social-icon fa fa-bookmark"></i>
+                                    <i style="font-size: 16px;" class="social-icon fa fa-bookmark"></i>
                                     {% endif %}
                                 </a>
-                                <button class="btn btn-danger" data-toggle="modal" data-target="#reportModal" aria-label="Report">
-                                    Report
-                                </button>
-                                <a class="social-icon fa fa-instagram" style="font-size: 24px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 0.7px solid var(--foreground-tertiary);" aria-label="Share on Instagram" onclick="shareOnInstagram('{{ record.url }}')"></a>
-                                <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20link:%20{{ record.url }}" target="_blank" class="social-icon fa fa-whatsapp" style="font-size: 24px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 0.7px solid var(--foreground-tertiary);" aria-label="Share on WhatsApp"></a>
-                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ record.url }}" target="_blank" class="social-icon fa fa-facebook" style="font-size: 24px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 0.7px solid var(--foreground-tertiary);" aria-label="Share on Facebook"></a>
+                                <a style="display: flex; align-items: center; justify-content: center; border: 2px solid var(--foreground-tertiary); padding: 0; min-width: 30px!important; width!important: 30px; height: 30px;!important" class="btn btn-danger" data-toggle="modal" data-target="#reportModal" aria-label="Report">
+                                    <span style="font-size: 16px;" class="material-symbols-outlined"> report </span>
+                                </a>
+                                <a style="display: flex; align-items: center; justify-content: center; border: 2px solid var(--foreground-tertiary); padding: 0; min-width: 30px!important; width: 30px; height: 30px;" class="btn copy-btn" onclick="copyToClipboard('{{ record.url }}')" aria-label="Copy URL">
+                                    <span style="font-size: 16px;color: var(--foreground-secondary);" class="material-symbols-outlined"> content_copy </span>
+                                </a>
+                                <a class="social-icon fa fa-instagram" style="font-size: 16px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--foreground-tertiary);" aria-label="Share on Instagram" onclick="shareOnInstagram('{{ record.url }}')"></a>
+                                <a href="https://api.whatsapp.com/send?text=Check%20out%20this%20link:%20{{ record.url }}" target="_blank" class="social-icon fa fa-whatsapp" style="font-size: 16px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--foreground-tertiary);" aria-label="Share on WhatsApp"></a>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{ record.url }}" target="_blank" class="social-icon fa fa-facebook" style="font-size: 16px; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--foreground-tertiary);" aria-label="Share on Facebook"></a>
                                 
                             </div>
                         </div>
