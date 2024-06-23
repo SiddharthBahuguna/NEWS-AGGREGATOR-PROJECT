@@ -26,7 +26,8 @@ class Headline(models.Model):
   average_rating = models.FloatField(default=0, null=True, blank=True)
   rating_count = models.IntegerField(default=0)
   def __str__(self):
-    return self.title
+    return f'{self.id} -> {self.title}'
+
   
 class Bookmark(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -39,11 +40,11 @@ class Bookmark(models.Model):
 # stores all the rating given by all the users
 class Rating(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    headline = models.ForeignKey(Headline, on_delete=models.CASCADE)
+    headline = models.ForeignKey(Headline, on_delete=models.CASCADE, related_name="ratings")
     rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)], null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user} rated {self.headline.title} as {self.rating}"
+        return f"{self.id} ->  ({self.user}) rated {self.headline.id} ({self.headline.title}) as {self.rating}"
 
 
 
