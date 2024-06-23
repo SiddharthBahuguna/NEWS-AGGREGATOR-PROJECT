@@ -234,8 +234,7 @@ def rate_headline(request, headline_id):
         headline.rating_count = ratings.count()
         headline.average_rating = sum(r.rating for r in ratings) / headline.rating_count if headline.rating_count > 0 else 0
         headline.save()
-
-        return JsonResponse({'status': 'success', 'average_rating': headline.average_rating, 'rating_count': headline.rating_count})
+        return JsonResponse({'status': 'success', 'average_rating': round(headline.average_rating, 2), 'rating_count': headline.rating_count})
 
     return JsonResponse({'status': 'fail'}, status=400)
 

@@ -28,20 +28,20 @@
                     
                         <div class="rating-container">
                             <div class="rate" id="rate-{{ record.id }}">
-                                <input type="radio" id="star5-{{ record.id }}" name="rate-{{ record.id }}" value="5" onclick="setRating('{{ record.id }}', 5)" {% if record.user_rating == 5 %}checked{% endif %} />
+                                <input type="radio" id="star5-{{ record.id }}" name="rate-{{ record.id }}" value="5" onclick="setRating('{{ record.id }}', 5)"  {% for rt in record.ratings.all %}{% if rt.user == request.user and  rt.rating == 5 %} checked{% endif %}{%endfor %} />
                                 <label for="star5-{{ record.id }}"></label>
-                                <input type="radio" id="star4-{{ record.id }}" name="rate-{{ record.id }}" value="4" onclick="setRating('{{ record.id }}', 4)" {% if record.user_rating == 4 %}checked{% endif %} />
+                                <input type="radio" id="star4-{{ record.id }}" name="rate-{{ record.id }}" value="4" onclick="setRating('{{ record.id }}', 4)"  {% for rt in record.ratings.all %}{% if rt.user == request.user and  rt.rating == 4 %} checked{% endif %}{%endfor %}/>
                                 <label for="star4-{{ record.id }}"></label>
-                                <input type="radio" id="star3-{{ record.id }}" name="rate-{{ record.id }}" value="3" onclick="setRating('{{ record.id }}', 3)" {% if record.user_rating == 3 %}checked{% endif %} />
+                                <input type="radio" id="star3-{{ record.id }}" name="rate-{{ record.id }}" value="3" onclick="setRating('{{ record.id }}', 3)"  {% for rt in record.ratings.all %}{% if rt.user == request.user and  rt.rating == 3 %} checked{% endif %}{%endfor %}/>
                                 <label for="star3-{{ record.id }}"></label>
-                                <input type="radio" id="star2-{{ record.id }}" name="rate-{{ record.id }}" value="2" onclick="setRating('{{ record.id }}', 2)" {% if record.user_rating == 2 %}checked{% endif %} />
+                                <input type="radio" id="star2-{{ record.id }}" name="rate-{{ record.id }}" value="2" onclick="setRating('{{ record.id }}', 2)"  {% for rt in record.ratings.all %}{% if rt.user == request.user and  rt.rating == 2 %} checked{% endif %}{%endfor %}/>
                                 <label for="star2-{{ record.id }}"></label>
-                                <input type="radio" id="star1-{{ record.id }}" name="rate-{{ record.id }}" value="1" onclick="setRating('{{ record.id }}', 1)" {% if record.user_rating == 1 %}checked{% endif %} />
+                                <input type="radio" id="star1-{{ record.id }}" name="rate-{{ record.id }}" value="1" onclick="setRating('{{ record.id }}', 1)"  {% for rt in record.ratings.all %}{% if rt.user == request.user and  rt.rating == 1 %} checked{% endif %}{%endfor %}/>
                                 <label for="star1-{{ record.id }}"></label>
                             </div>
                             <div class="average-rating" id="average-rating-{{ record.id }}">
                                 {% if record.average_rating %}
-                                    ({{ record.average_rating }})
+                                    ({{ record.average_rating | floatformat:2}})
                                 {% endif %}
                                 <button id="submit-btn-{{ record.id }}" style="font-size: 16px; display: flex; align-items: center; justify-content: center; min-width: 30px!important; height: 30px!important; border-radius: 50%; border: 2px solid var(--foreground-tertiary);" class="submit-btn" onclick="submitRating('{{ record.id }}')">
                                     <span class="material-symbols-outlined">check</span>
@@ -74,7 +74,7 @@
                                     <i style="font-size: 16px;" class="social-icon fa fa-bookmark"></i>
                                     {% endif %}
                                 </a>
-                                <a style="display: flex; align-items: center; justify-content: center; border: 2px solid var(--foreground-tertiary); padding: 0; min-width: 30px!important; width!important: 30px; height: 30px;!important" class="btn btn-danger" data-toggle="modal" data-target="#reportModal" aria-label="Report">
+                                <a style="display: flex; align-items: center; justify-content: center; border: 2px solid var(--foreground-tertiary); padding: 0; min-width: 30px!important; width: 30px !important; height: 30px !important;" class="btn btn-danger" data-toggle="modal" data-target="#reportModal" aria-label="Report">
                                     <span style="font-size: 16px;" class="material-symbols-outlined"> report </span>
                                 </a>
                                 <a style="display: flex; align-items: center; justify-content: center; border: 2px solid var(--foreground-tertiary); padding: 0; min-width: 30px!important; width: 30px; height: 30px;" class="btn copy-btn" onclick="copyToClipboard('{{ record.url }}')" aria-label="Copy URL">
