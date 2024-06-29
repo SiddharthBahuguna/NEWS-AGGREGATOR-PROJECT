@@ -17,9 +17,6 @@ The news aggregator project aims to create a centralized platform that curates a
 
 
 
-
-
-    
 # Steps For Contribution⚡
 
 0. Star ⭐
