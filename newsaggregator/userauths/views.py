@@ -62,3 +62,6 @@ def logout_view(request):
     messages.success(request, "You Logged-Out, successfully")
     
     return redirect("userauths:sign-in",)
+
+def home(request):
+    return render(request,'base_auth.html')

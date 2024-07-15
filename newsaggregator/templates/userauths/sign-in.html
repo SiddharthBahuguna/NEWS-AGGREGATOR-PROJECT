@@ -2,6 +2,34 @@
 {% load static %}
 
 {% block authentication %}
+<style>
+    .social-container1 {
+        text-align: center; /* Center-align content */
+    }
+
+    .btn-primary1 {
+        background-color: #4285F4; /* Google Blue */
+        border: none; /* Remove border */
+        padding: 10px 20px; /* Adjust padding */
+        font-size: 16px; /* Adjust font size */
+        cursor: pointer; /* Add cursor pointer on hover */
+    }
+
+    .btn-primary1:hover {
+        background-color: #357AE8; /* Darker shade of Google Blue on hover */
+    }
+
+    .btn-lin {
+        color: #fff; /* White text color */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .btn-lin:hover {
+        color: #fff; /* White text color on hover */
+        text-decoration: none; /* Remove underline on hover */
+    }
+</style>
+
 <div class="container">
     <div class="main-container">
         <div class="main-content">
@@ -59,8 +87,18 @@
                                     </div>
                                 </div>
                             </form>
-        
-        
+                            
+                            <div class="row">
+                                <div class="col-md-8 mx-auto my-2 order-md-1">
+                                    <div class="social-container1">
+                                        <button class="btn btn-primary1 mb-4">
+                                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn-lin">Login With Google</a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                       
                         </div>
                         <div class="box goto">
                             <p>
