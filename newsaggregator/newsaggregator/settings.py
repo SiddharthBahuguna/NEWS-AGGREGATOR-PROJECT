@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
     # custom apps
     'django_social_share',
+    'social_django',
+ 
     'core',
     
     # authentication
@@ -62,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 
     # render.com middleware
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -80,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -147,3 +151,16 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL='userauths.User'
+
+
+AUTHENTICATION_BACKENDS =[
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL ='logout'
+LOGOUT_REDIRECT_URL ='login'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'google_key'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ='google_secret'
